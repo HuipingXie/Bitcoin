@@ -1,2 +1,2 @@
 # Bitcoin
-Bitcoin analysing &amp; trading
+Bitcoin analysing & trading
