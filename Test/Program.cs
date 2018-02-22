@@ -5,8 +5,9 @@ namespace Test
 {
     class Program
     {
-        const string apiKey = "MLWYRyvxqdAn3KnjLMIrcgibLQayZcrKg0ULzu4PHx1jbG72jvhRyNvs8GTL87Ii";
-        const string secretKey = "4b5sRs2r9hzlcehgV4frFFhgjbAFanUZtMTpJqGFPUpwxjDSFu6aSWQhTNPwcqPo";
+        // fill the keys of your own account
+        const string apiKey = "";
+        const string secretKey = "";
 
         const string symbol = "BtcUsdt";
 
