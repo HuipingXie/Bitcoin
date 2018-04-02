@@ -63,6 +63,12 @@ namespace BinanceAPI
                 SecurityType.MARKET_DATA);
         }
 
+        public async Task<AccountInfo> GetAccountInfo()
+        {
+            return await Process<AccountInfo>(
+                "/api/v3/account?", SecurityType.USER_DATA);
+        }
+
         public async Task<List<AccountTradeInfo>> GetAccountTrades()
         {
             return await Process<List<AccountTradeInfo>>(

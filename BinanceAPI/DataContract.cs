@@ -165,4 +165,26 @@ namespace BinanceAPI
         [JsonProperty("isBestMatch")]
         public bool IsBestMatch;
     }
+
+    public class BalanceInfo : IBinanceData
+    {
+        [JsonProperty("asset")]
+        public string AssetSymbol;
+
+        [JsonProperty("free")]
+        public decimal FreeAsset;
+
+        [JsonProperty("locked")]
+        public decimal LockedAsset;
+    }
+
+    public class AccountInfo : IBinanceData
+    {
+        [JsonProperty("updateTime")]
+        [JsonConverter(typeof(JsTimeConverter))]
+        public DateTime UpdateTime;
+
+        [JsonProperty("balances")]
+        public List<BalanceInfo> Balances;
+    }
 }
