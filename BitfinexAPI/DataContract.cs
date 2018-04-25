@@ -14,7 +14,7 @@ namespace BitfinexAPI
 
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
-            return DateTimeOffset.FromUnixTimeSeconds((long)decimal.Parse((string)reader.Value)).DateTime;
+            return DateTimeOffset.FromUnixTimeSeconds((long)decimal.Parse(reader.Value.ToString())).DateTime;
         }
 
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
@@ -25,6 +25,17 @@ namespace BitfinexAPI
 
     public class BaseInfo : Dictionary<string, object>
     {
+    }
+
+    public class TradeInfo
+    {
+        public decimal price;
+        public decimal amount;
+        [JsonConverter(typeof(TimeConverter))]
+        public DateTime timestamp;
+        public string type;
+        public long tid;
+        public string exchange;
     }
 
     public class PairInfo
