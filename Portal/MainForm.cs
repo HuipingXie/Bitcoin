@@ -14,9 +14,7 @@ namespace Portal
 {
     public partial class MainForm : Form
     {
-        BitfinexMethod _backend = new BitfinexMethod(
-            "R9iBSQT2tqFsnZAvFVx06x3JoMXIpXwI3AUxZxLbTmf",
-            "bNEJpx1LYc7Cdn2QYbvoNpcu4NOAUSrofYwPETSgRAB");
+        BitfinexMethod _backend = new BitfinexMethod();
 
         public MainForm()
         {
