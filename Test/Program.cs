@@ -13,7 +13,7 @@ namespace Test
         static void Main(string[] args)
         {
             BitfinexMethod m = new BitfinexMethod(apiKey, secretKey);
-            var r = m.GetOrdersHistory().Result;
+            var r = m.GetBalances().Result;
 
             Console.ReadKey();
         }

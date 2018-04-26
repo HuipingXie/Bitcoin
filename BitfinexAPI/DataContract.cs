@@ -79,7 +79,7 @@ namespace BitfinexAPI
         public long id;
         public string symbol;
         public string exchange;
-        public decimal price;
+        public decimal? price;
         public decimal avg_execution_price;
         public string side;
         public string type;

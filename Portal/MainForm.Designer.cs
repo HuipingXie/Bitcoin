@@ -46,6 +46,8 @@
             this.PidBox = new System.Windows.Forms.TextBox();
             this.CloseButton = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
+            this.BalanceBox = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // PositionsBox
@@ -54,23 +56,25 @@
             this.PositionsBox.Multiline = true;
             this.PositionsBox.Name = "PositionsBox";
             this.PositionsBox.ReadOnly = true;
-            this.PositionsBox.Size = new System.Drawing.Size(707, 151);
+            this.PositionsBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.PositionsBox.Size = new System.Drawing.Size(707, 259);
             this.PositionsBox.TabIndex = 0;
             // 
             // OrdersBox
             // 
-            this.OrdersBox.Location = new System.Drawing.Point(12, 243);
+            this.OrdersBox.Location = new System.Drawing.Point(12, 308);
             this.OrdersBox.Multiline = true;
             this.OrdersBox.Name = "OrdersBox";
             this.OrdersBox.ReadOnly = true;
-            this.OrdersBox.Size = new System.Drawing.Size(707, 154);
+            this.OrdersBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.OrdersBox.Size = new System.Drawing.Size(707, 89);
             this.OrdersBox.TabIndex = 1;
             // 
             // RefreshButton
             // 
-            this.RefreshButton.Location = new System.Drawing.Point(734, 97);
+            this.RefreshButton.Location = new System.Drawing.Point(763, 205);
             this.RefreshButton.Name = "RefreshButton";
-            this.RefreshButton.Size = new System.Drawing.Size(114, 38);
+            this.RefreshButton.Size = new System.Drawing.Size(114, 97);
             this.RefreshButton.TabIndex = 2;
             this.RefreshButton.Text = "Refresh";
             this.RefreshButton.UseVisualStyleBackColor = true;
@@ -92,7 +96,7 @@
             // 
             // ExecuteButton
             // 
-            this.ExecuteButton.Location = new System.Drawing.Point(566, 461);
+            this.ExecuteButton.Location = new System.Drawing.Point(584, 461);
             this.ExecuteButton.Name = "ExecuteButton";
             this.ExecuteButton.Size = new System.Drawing.Size(114, 38);
             this.ExecuteButton.TabIndex = 105;
@@ -176,7 +180,7 @@
             // 
             // CancelBox
             // 
-            this.CancelBox.Location = new System.Drawing.Point(734, 289);
+            this.CancelBox.Location = new System.Drawing.Point(727, 461);
             this.CancelBox.Name = "CancelBox";
             this.CancelBox.Size = new System.Drawing.Size(114, 38);
             this.CancelBox.TabIndex = 15;
@@ -210,11 +214,30 @@
             this.label6.TabIndex = 108;
             this.label6.Text = "id:";
             // 
+            // BalanceBox
+            // 
+            this.BalanceBox.Location = new System.Drawing.Point(425, 536);
+            this.BalanceBox.Name = "BalanceBox";
+            this.BalanceBox.ReadOnly = true;
+            this.BalanceBox.Size = new System.Drawing.Size(452, 26);
+            this.BalanceBox.TabIndex = 109;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(350, 539);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(69, 20);
+            this.label7.TabIndex = 110;
+            this.label7.Text = "balance:";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(945, 691);
+            this.ClientSize = new System.Drawing.Size(945, 632);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.BalanceBox);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.CloseButton);
             this.Controls.Add(this.PidBox);
@@ -260,6 +283,8 @@
         private System.Windows.Forms.TextBox PidBox;
         private System.Windows.Forms.Button CloseButton;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox BalanceBox;
+        private System.Windows.Forms.Label label7;
     }
 }
 

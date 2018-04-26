@@ -25,20 +25,33 @@ namespace Portal
         {
             var positions = await _backend.GetActivePositions();
 
-            PositionsBox.Text = "";
+            PositionsBox.Text = "    id              symbol   amount      price    value      p/l \r\n";
             foreach (var i in positions)
                 PositionsBox.Text += i.id
                     + "  " + i.symbol
-                    + "  " + i.amount
-                    + "  " + i.base_price
-                    + "  " + i.pl
+                    + "  " + i.amount.ToString("N4")
+                    + "  " + i.base_price.ToString("N4")
+                    + "  " + (i.base_price * i.amount).ToString("N4")
+                    + "  " + i.pl.ToString("N4")
                     + "\r\n";
 
             var orders = await _backend.GetActiveOrders();
 
             OrdersBox.Text = "";
             foreach (var i in orders)
-                OrdersBox.Text += i.symbol + "  " + i.original_amount + "  " + i.side + "  " + i.price + "\r\n";
+                OrdersBox.Text += i.symbol
+                    + "  " + i.original_amount
+                    + "  " + i.side
+                    + "  " + i.avg_execution_price
+                    + "  " + i.type
+                    + "  " + i.timestamp
+                    + "\r\n";
+
+            var balance = await _backend.GetBalances();
+
+            foreach (var i in balance)
+                if (i.type == "trading" && i.currency == "usd")
+                    BalanceBox.Text = "amount: " + i.amount + "    available: " + i.available;
         }
 
         private async void ExecuteButton_Click(object sender, EventArgs e)
