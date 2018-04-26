@@ -81,8 +81,8 @@ namespace BitfinexAPI
             args.Add("symbol", symbol);
             args.Add("amount", amount.ToString());
             args.Add("price", price.ToString());
-            args.Add("side", side.ToString());
-            args.Add("type", type.ToString());
+            args.Add("side", ConvertHelper.ObtainEnumValue(side));
+            args.Add("type", ConvertHelper.ObtainEnumValue(type));
 
             return await Process<OrderInfo>(args);
         }

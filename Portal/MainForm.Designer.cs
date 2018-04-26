@@ -135,8 +135,8 @@
             // 
             this.SideBox.FormattingEnabled = true;
             this.SideBox.Items.AddRange(new object[] {
-            "buy",
-            "sell"});
+            "BUY",
+            "SELL"});
             this.SideBox.Location = new System.Drawing.Point(224, 467);
             this.SideBox.Name = "SideBox";
             this.SideBox.Size = new System.Drawing.Size(100, 28);
@@ -146,8 +146,8 @@
             // 
             this.TypeBox.FormattingEnabled = true;
             this.TypeBox.Items.AddRange(new object[] {
-            "market",
-            "limit"});
+            "MARKET",
+            "LIMIT"});
             this.TypeBox.Location = new System.Drawing.Point(330, 467);
             this.TypeBox.Name = "TypeBox";
             this.TypeBox.Size = new System.Drawing.Size(100, 28);

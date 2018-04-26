@@ -6,6 +6,15 @@ using Newtonsoft.Json.Converters;
 
 namespace BitfinexAPI
 {
+    static class ConvertHelper
+    {
+        public static string ObtainEnumValue<T>(T data)
+        {
+            var info = JsonConvert.SerializeObject(data, new StringEnumConverter());
+            return JsonConvert.DeserializeObject<string>(info);
+        }
+    }
+
     public class BaseInfo : Dictionary<string, object>
     {
     }

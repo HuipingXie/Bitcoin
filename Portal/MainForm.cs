@@ -14,7 +14,8 @@ namespace Portal
 {
     public partial class MainForm : Form
     {
-        BitfinexMethod _backend = new BitfinexMethod();
+        BitfinexMethod _backend = new BitfinexMethod(
+            );
 
         public MainForm()
         {
@@ -25,7 +26,7 @@ namespace Portal
         {
             var positions = await _backend.GetActivePositions();
 
-            PositionsBox.Text = "    id              symbol   amount      price    value      p/l \r\n";
+            PositionsBox.Text = "";
             foreach (var i in positions)
                 PositionsBox.Text += i.id
                     + "  " + i.symbol
@@ -49,9 +50,13 @@ namespace Portal
 
             var balance = await _backend.GetBalances();
 
+            BalanceBox.Text = "";
             foreach (var i in balance)
-                if (i.type == "trading" && i.currency == "usd")
-                    BalanceBox.Text = "amount: " + i.amount + "    available: " + i.available;
+                if (i.type == "trading")
+                    if (i.currency == "eth" || i.currency == "eos")
+                        BalanceBox.Text += i.currency
+                            + ": " + i.amount.ToString("N4")
+                            + ";  " + i.available.ToString("N4") + "   ";
         }
 
         private async void ExecuteButton_Click(object sender, EventArgs e)
