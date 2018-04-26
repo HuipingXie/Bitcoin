@@ -59,8 +59,8 @@ namespace Portal
             string symbol = SymbolBox.Text;
             decimal amount = decimal.Parse(AmountBox.Text);
             decimal price = decimal.Parse(PriceBox.Text);
-            string side = SideBox.Text;
-            string type = TypeBox.Text;
+            OrderSide side = (OrderSide)Enum.Parse(typeof(OrderSide), SideBox.Text);
+            OrderType type = (OrderType)Enum.Parse(typeof(OrderType), TypeBox.Text);
 
             var result = await _backend.CreateOrder(symbol, amount, price, side, type);
 

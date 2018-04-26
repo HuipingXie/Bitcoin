@@ -15,98 +15,90 @@ namespace BitfinexAPI
             _secretKey = secretKey;
         }
 
+        BaseInfo GeneratePayload(string path)
+        {
+            var args = new BaseInfo();
+            args.Add("request", path);
+            args.Add("nonce", DateTime.Now.Ticks.ToString());
+
+            return args;
+        }
+
+        async Task<T> Process<T>(string path)
+        {
+            return await AccessRestApi.InvokeHttpCall<T>(path);
+        }
+
+        async Task<T> Process<T>(BaseInfo args)
+        {
+            return await AccessRestApi.InvokeHttpCall<T>(
+                (string)args["request"], args, _apiKey, _secretKey);
+        }
+
         public async Task<List<TradeInfo>> GetTrades(string symbol)
         {
-            string path = "/v1/trades/" + symbol;
-            return await AccessRestApi.InvokePublicCall<List<TradeInfo>>(path);
+            return await Process<List<TradeInfo>>("/v1/trades/" + symbol);
         }
 
         public async Task<OrderBookInfo> GetOrderBook(string symbol)
         {
-            string path = "/v1/book/" + symbol;
-            return await AccessRestApi.InvokePublicCall<OrderBookInfo>(path);
+            return await Process<OrderBookInfo>("/v1/book/" + symbol);
         }
 
         public async Task<List<BalanceInfo>> GetBalances()
         {
-            BaseInfo args = new BaseInfo();
-            args.Add("request", "/v1/balances");
-            args.Add("nonce", DateTime.Now.Ticks.ToString());
-
-            return await AccessRestApi.InvokeAuthenticatedCall<List<BalanceInfo>>(
-                args, _apiKey, _secretKey);
+            var args = GeneratePayload("/v1/balances");
+            return await Process<List<BalanceInfo>>(args);
         }
 
         public async Task<List<OrderInfo>> GetActiveOrders()
         {
-            BaseInfo args = new BaseInfo();
-            args.Add("request", "/v1/orders");
-            args.Add("nonce", DateTime.Now.Ticks.ToString());
-
-            return await AccessRestApi.InvokeAuthenticatedCall<List<OrderInfo>>(
-                args, _apiKey, _secretKey);
+            var args = GeneratePayload("/v1/orders");
+            return await Process<List<OrderInfo>>(args);
         }
 
         public async Task<List<OrderInfo>> GetOrdersHistory()
         {
-            BaseInfo args = new BaseInfo();
-            args.Add("request", "/v1/orders/hist");
-            args.Add("nonce", DateTime.Now.Ticks.ToString());
-
-            return await AccessRestApi.InvokeAuthenticatedCall<List<OrderInfo>>(
-                args, _apiKey, _secretKey);
+            var args = GeneratePayload("/v1/orders/hist");
+            return await Process<List<OrderInfo>>(args);
         }
 
         public async Task<List<PositionInfo>> GetActivePositions()
         {
-            BaseInfo args = new BaseInfo();
-            args.Add("request", "/v1/positions");
-            args.Add("nonce", DateTime.Now.Ticks.ToString());
-
-            return await AccessRestApi.InvokeAuthenticatedCall<List<PositionInfo>>(
-                args, _apiKey, _secretKey);
+            var args = GeneratePayload("/v1/positions");
+            return await Process<List<PositionInfo>>(args);
         }
 
         public async Task<OrderInfo> CreateOrder(
             string symbol,
             decimal amount,
             decimal price,
-            string side,
-            string type)
+            OrderSide side,
+            OrderType type)
         {
-            BaseInfo args = new BaseInfo();
-            args.Add("request", "/v1/order/new");
-            args.Add("nonce", DateTime.Now.Ticks.ToString());
+            var args = GeneratePayload("/v1/order/new");
             args.Add("exchange", "bitfinex");
             args.Add("symbol", symbol);
             args.Add("amount", amount.ToString());
             args.Add("price", price.ToString());
-            args.Add("side", side);
-            args.Add("type", type);
+            args.Add("side", side.ToString());
+            args.Add("type", type.ToString());
 
-            return await AccessRestApi.InvokeAuthenticatedCall<OrderInfo>(
-                args, _apiKey, _secretKey);
+            return await Process<OrderInfo>(args);
         }
 
         public async Task<BaseInfo> CancelAllOrders()
         {
-            BaseInfo args = new BaseInfo();
-            args.Add("request", "/v1/order/cancel/all");
-            args.Add("nonce", DateTime.Now.Ticks.ToString());
-
-            return await AccessRestApi.InvokeAuthenticatedCall<BaseInfo>(
-                args, _apiKey, _secretKey);
+            var args = GeneratePayload("/v1/order/cancel/all");
+            return await Process<BaseInfo>(args);
         }
 
         public async Task<BaseInfo> ClosePosition(long id)
         {
-            BaseInfo args = new BaseInfo();
-            args.Add("request", "/v1/position/close");
-            args.Add("nonce", DateTime.Now.Ticks.ToString());
+            var args = GeneratePayload("/v1/position/close");
             args.Add("position_id", id);
 
-            return await AccessRestApi.InvokeAuthenticatedCall<BaseInfo>(
-                args, _apiKey, _secretKey);
+            return await Process<BaseInfo>(args);
         }
     }
 }

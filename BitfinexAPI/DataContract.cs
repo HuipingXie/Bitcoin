@@ -2,27 +2,10 @@
 using System.Collections.Generic;
 
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace BitfinexAPI
 {
-    class TimeConverter : JsonConverter
-    {
-        public override bool CanConvert(Type objectType)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
-        {
-            return DateTimeOffset.FromUnixTimeSeconds((long)decimal.Parse(reader.Value.ToString())).DateTime;
-        }
-
-        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
-        {
-            writer.WriteValue(new DateTimeOffset((DateTime)value).ToUnixTimeSeconds());
-        }
-    }
-
     public class BaseInfo : Dictionary<string, object>
     {
     }
@@ -33,7 +16,8 @@ namespace BitfinexAPI
         public decimal amount;
         [JsonConverter(typeof(TimeConverter))]
         public DateTime timestamp;
-        public string type;
+        [JsonConverter(typeof(StringEnumConverter))]
+        public OrderSide type;
         public long tid;
         public string exchange;
     }
@@ -81,8 +65,10 @@ namespace BitfinexAPI
         public string exchange;
         public decimal? price;
         public decimal avg_execution_price;
-        public string side;
-        public string type;
+        [JsonConverter(typeof(StringEnumConverter))]
+        public OrderSide side;
+        [JsonConverter(typeof(StringEnumConverter))]
+        public OrderType type;
         [JsonConverter(typeof(TimeConverter))]
         public DateTime timestamp;
         public bool is_live;
