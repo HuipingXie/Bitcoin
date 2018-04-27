@@ -26,34 +26,42 @@ namespace Portal
         {
             var positions = await _backend.GetActivePositions();
 
+            decimal sum = 0;
             PositionsBox.Text = "";
             foreach (var i in positions)
+            {
                 PositionsBox.Text += i.id
-                    + "  " + i.symbol
-                    + "  " + i.amount.ToString("N4")
-                    + "  " + i.base_price.ToString("N4")
-                    + "  " + (i.base_price * i.amount).ToString("N4")
-                    + "  " + i.pl.ToString("N4")
+                    + "    " + i.symbol
+                    + "    " + i.amount.ToString("N4")
+                    + "    " + i.base_price.ToString("N4")
+                    + "    " + (i.base_price * i.amount).ToString("N4")
+                    + "    " + i.pl.ToString("N4")
                     + "\r\n";
+
+                sum += i.pl;
+            }
+
+            var btc = await _backend.GetTrades("BTCUSD");
+            sum = sum * btc[0].price;
 
             var orders = await _backend.GetActiveOrders();
 
             OrdersBox.Text = "";
             foreach (var i in orders)
                 OrdersBox.Text += i.symbol
-                    + "  " + i.original_amount
+                    + "  " + i.remaining_amount.ToString("N4")
                     + "  " + i.side
-                    + "  " + i.avg_execution_price
+                    + "  " + i.avg_execution_price.ToString("N4")
                     + "  " + i.type
                     + "  " + i.timestamp
                     + "\r\n";
 
             var balance = await _backend.GetBalances();
 
-            BalanceBox.Text = "";
+            BalanceBox.Text = "net: " + sum.ToString("N4") + "    ";
             foreach (var i in balance)
                 if (i.type == "trading")
-                    if (i.currency == "eth" || i.currency == "eos")
+                    if (i.currency == "usd")
                         BalanceBox.Text += i.currency
                             + ": " + i.amount.ToString("N4")
                             + ";  " + i.available.ToString("N4") + "   ";

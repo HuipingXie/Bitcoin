@@ -69,6 +69,21 @@ namespace BitfinexAPI
             return await Process<List<PositionInfo>>(args);
         }
 
+        public async Task<List<BaseInfo>> TransferWallets(
+            decimal amount,
+            string currency,
+            string walletfrom,
+            string walletto)
+        {
+            var args = GeneratePayload("/v1/transfer");
+            args.Add("amount", amount.ToString());
+            args.Add("currency", currency);
+            args.Add("walletfrom", walletfrom);
+            args.Add("walletto", walletto);
+
+            return await Process<List<BaseInfo>>(args);
+        }
+
         public async Task<OrderInfo> CreateOrder(
             string symbol,
             decimal amount,
