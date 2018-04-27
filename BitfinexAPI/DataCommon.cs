@@ -21,4 +21,14 @@ namespace BitfinexAPI
         [EnumMember(Value = "exchange market")]
         EXCHANGE_MARKET,
     }
+
+    public enum WalletType
+    {
+        [EnumMember(Value = "exchange")]
+        EXCHANGE,
+        [EnumMember(Value = "trading")]
+        TRADING,
+        [EnumMember(Value = "funding")]
+        FUNDING,
+    }
 }

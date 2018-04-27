@@ -65,7 +65,8 @@ namespace BitfinexAPI
 
     public class BalanceInfo
     {
-        public string type;
+        [JsonConverter(typeof(StringEnumConverter))]
+        public WalletType type;
         public string currency;
         public decimal amount;
         public decimal available;

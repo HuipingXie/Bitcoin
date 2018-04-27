@@ -72,14 +72,14 @@ namespace BitfinexAPI
         public async Task<List<BaseInfo>> TransferWallets(
             decimal amount,
             string currency,
-            string walletfrom,
-            string walletto)
+            WalletType walletfrom,
+            WalletType walletto)
         {
             var args = GeneratePayload("/v1/transfer");
             args.Add("amount", amount.ToString());
             args.Add("currency", currency);
-            args.Add("walletfrom", walletfrom);
-            args.Add("walletto", walletto);
+            args.Add("walletfrom", ConvertHelper.ObtainEnumValue(walletfrom));
+            args.Add("walletto", ConvertHelper.ObtainEnumValue(walletto));
 
             return await Process<List<BaseInfo>>(args);
         }
