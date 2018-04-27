@@ -55,7 +55,7 @@ namespace Portal
 
             BalanceBox.Text = "net: " + sum.ToString("N4") + "    ";
             foreach (var i in balance)
-                if (i.type == "trading")
+                if (i.type == WalletType.TRADING)
                     if (i.currency == "usd")
                         BalanceBox.Text += i.currency
                             + ": " + i.amount.ToString("N4")
