@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Configuration;
 using System.Windows.Forms;
 
 using BitfinexAPI;
@@ -15,7 +9,8 @@ namespace Portal
     public partial class MainForm : Form
     {
         BitfinexMethod _backend = new BitfinexMethod(
-            );
+            ConfigurationManager.AppSettings["ApiKey"],
+            ConfigurationManager.AppSettings["SecretKey"]);
 
         public MainForm()
         {

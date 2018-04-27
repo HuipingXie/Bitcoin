@@ -1,28 +1,7 @@
-﻿using System;
-using System.Runtime.Serialization;
-
-using Newtonsoft.Json;
+﻿using System.Runtime.Serialization;
 
 namespace BitfinexAPI
 {
-    class TimeConverter : JsonConverter
-    {
-        public override bool CanConvert(Type objectType)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
-        {
-            return DateTimeOffset.FromUnixTimeSeconds((long)decimal.Parse(reader.Value.ToString())).DateTime;
-        }
-
-        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
-        {
-            writer.WriteValue(new DateTimeOffset((DateTime)value).ToUnixTimeSeconds());
-        }
-    }
-
     public enum OrderSide
     {
         [EnumMember(Value = "buy")]
