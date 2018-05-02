@@ -24,12 +24,12 @@ namespace BitfinexAPI
             return args;
         }
 
-        async Task<T> Process<T>(string path)
+        async Task<T> ProcessPublic<T>(string path)
         {
             return await AccessRestApi.InvokeHttpCall<T>(path);
         }
 
-        async Task<T> Process<T>(BaseInfo args)
+        async Task<T> ProcessAuthenticated<T>(BaseInfo args)
         {
             return await AccessRestApi.InvokeHttpCall<T>(
                 (string)args["request"], args, _apiKey, _secretKey);
@@ -37,36 +37,36 @@ namespace BitfinexAPI
 
         public async Task<List<TradeInfo>> GetTrades(string symbol)
         {
-            return await Process<List<TradeInfo>>("/v1/trades/" + symbol);
+            return await ProcessPublic<List<TradeInfo>>("/v1/trades/" + symbol);
         }
 
         public async Task<OrderBookInfo> GetOrderBook(string symbol)
         {
-            return await Process<OrderBookInfo>("/v1/book/" + symbol);
+            return await ProcessPublic<OrderBookInfo>("/v1/book/" + symbol);
         }
 
         public async Task<List<BalanceInfo>> GetBalances()
         {
             var args = GeneratePayload("/v1/balances");
-            return await Process<List<BalanceInfo>>(args);
+            return await ProcessAuthenticated<List<BalanceInfo>>(args);
         }
 
         public async Task<List<OrderInfo>> GetActiveOrders()
         {
             var args = GeneratePayload("/v1/orders");
-            return await Process<List<OrderInfo>>(args);
+            return await ProcessAuthenticated<List<OrderInfo>>(args);
         }
 
         public async Task<List<OrderInfo>> GetOrdersHistory()
         {
             var args = GeneratePayload("/v1/orders/hist");
-            return await Process<List<OrderInfo>>(args);
+            return await ProcessAuthenticated<List<OrderInfo>>(args);
         }
 
         public async Task<List<PositionInfo>> GetActivePositions()
         {
             var args = GeneratePayload("/v1/positions");
-            return await Process<List<PositionInfo>>(args);
+            return await ProcessAuthenticated<List<PositionInfo>>(args);
         }
 
         public async Task<List<BaseInfo>> TransferWallets(
@@ -81,7 +81,7 @@ namespace BitfinexAPI
             args.Add("walletfrom", ConvertHelper.ObtainEnumValue(walletfrom));
             args.Add("walletto", ConvertHelper.ObtainEnumValue(walletto));
 
-            return await Process<List<BaseInfo>>(args);
+            return await ProcessAuthenticated<List<BaseInfo>>(args);
         }
 
         public async Task<OrderInfo> CreateOrder(
@@ -99,13 +99,13 @@ namespace BitfinexAPI
             args.Add("side", ConvertHelper.ObtainEnumValue(side));
             args.Add("type", ConvertHelper.ObtainEnumValue(type));
 
-            return await Process<OrderInfo>(args);
+            return await ProcessAuthenticated<OrderInfo>(args);
         }
 
         public async Task<BaseInfo> CancelAllOrders()
         {
             var args = GeneratePayload("/v1/order/cancel/all");
-            return await Process<BaseInfo>(args);
+            return await ProcessAuthenticated<BaseInfo>(args);
         }
 
         public async Task<BaseInfo> ClosePosition(long id)
@@ -113,7 +113,7 @@ namespace BitfinexAPI
             var args = GeneratePayload("/v1/position/close");
             args.Add("position_id", id);
 
-            return await Process<BaseInfo>(args);
+            return await ProcessAuthenticated<BaseInfo>(args);
         }
     }
 }

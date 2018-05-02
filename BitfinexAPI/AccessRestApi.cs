@@ -13,11 +13,13 @@ namespace BitfinexAPI
         const string endpointBase = "https://api.bitfinex.com";
         static HttpClient _httpClient = new HttpClient();
 
+        public static async Task<T> InvokeHttpCall<T>(string path)
+        {
+            return await InvokeHttpCall<T>(path, null, "", "");
+        }
+
         public static async Task<T> InvokeHttpCall<T>(
-            string path,
-            BaseInfo args = null,
-            string apiKey = null,
-            string secretKey = null)
+            string path, BaseInfo args, string apiKey, string secretKey)
         {
             var req = new HttpRequestMessage(HttpMethod.Get, endpointBase + path);
 
