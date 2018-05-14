@@ -35,6 +35,11 @@ namespace BitfinexAPI
                 (string)args["request"], args, _apiKey, _secretKey);
         }
 
+        public async Task<List<string>> GetSymbols()
+        {
+            return await ProcessPublic<List<string>>("/v1/symbols");
+        }
+
         public async Task<List<TradeInfo>> GetTrades(string symbol)
         {
             return await ProcessPublic<List<TradeInfo>>("/v1/trades/" + symbol);
