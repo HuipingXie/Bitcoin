@@ -40,9 +40,9 @@ namespace BitfinexAPI
             return await ProcessPublic<List<string>>("/v1/symbols");
         }
 
-        public async Task<List<TradeInfo>> GetTrades(string symbol)
+        public async Task<List<TransactionInfo>> GetTrades(string symbol)
         {
-            return await ProcessPublic<List<TradeInfo>>("/v1/trades/" + symbol.ToLower());
+            return await ProcessPublic<List<TransactionInfo>>("/v1/trades/" + symbol.ToLower());
         }
 
         public async Task<OrderBookInfo> GetOrderBook(string symbol)
@@ -140,6 +140,24 @@ namespace BitfinexAPI
                 + "&sort=1";
 
             return await ProcessPublic<List<KlineInfo>>(path);
+        }
+
+        public async Task<List<TradeInfo>> GetHistoryTrades(
+            string symbol,
+            DateTime start,
+            DateTime end,
+            int limit = 800)
+        {
+            long s = new DateTimeOffset(start).ToUnixTimeMilliseconds();
+            long e = new DateTimeOffset(end).ToUnixTimeMilliseconds();
+
+            string path = "/v2/trades/t" + symbol.ToUpper()
+                + "/hist?limit=" + limit.ToString()
+                + "&start=" + s.ToString()
+                + "&end=" + e.ToString()
+                + "&sort=1";
+
+            return await ProcessPublic<List<TradeInfo>>(path);
         }
     }
 }

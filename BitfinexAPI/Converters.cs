@@ -60,4 +60,30 @@ namespace BitfinexAPI
             throw new NotImplementedException();
         }
     }
+
+    class TradeConverter : JsonConverter
+    {
+        public override bool CanConvert(Type objectType)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+        {
+            var o = JArray.Load(reader);
+
+            return new TradeInfo()
+            {
+                id = Convert.ToInt64(o[0]),
+                timestamp = DateTimeOffset.FromUnixTimeMilliseconds(Convert.ToInt64(o[1])).DateTime,
+                amount = Convert.ToDecimal(o[2]),
+                price = Convert.ToDecimal(o[3]),
+            };
+        }
+
+        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

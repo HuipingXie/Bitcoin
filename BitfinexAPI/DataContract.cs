@@ -10,7 +10,7 @@ namespace BitfinexAPI
     {
     }
 
-    public class TradeInfo
+    public class TransactionInfo
     {
         public decimal price;
         public decimal amount;
@@ -90,5 +90,14 @@ namespace BitfinexAPI
         public decimal high;
         public decimal low;
         public decimal volume;
+    }
+
+    [JsonConverter(typeof(TradeConverter))]
+    public class TradeInfo
+    {
+        public long id;
+        public DateTime timestamp;
+        public decimal price;
+        public decimal amount;
     }
 }
