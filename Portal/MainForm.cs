@@ -15,14 +15,20 @@ namespace Portal
         {
             InitializeComponent();
 
-            RefreshButton_Click(null, null);
+            Init();
         }
 
-        private async void RefreshButton_Click(object sender, EventArgs e)
+        private async void Init()
         {
             _orders = await Program.Backend.GetOrdersHistory();
             _balance = await Program.Backend.GetBalances();
 
+            RefreshTimer.Enabled = true;
+            RefreshButton.Enabled = true;
+        }
+
+        private void RefreshButton_Click(object sender, EventArgs e)
+        {
             RefreshTimer_Tick(null, null);
         }
 
