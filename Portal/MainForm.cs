@@ -19,6 +19,7 @@ namespace Portal
 
             foreach (var i in orders)
                 TradesView.Items.Add(new ListViewItem(new string[] {
+                    i.id.ToString(),
                     i.is_live.ToString(),
                     i.is_cancelled.ToString(),
                     i.symbol.ToUpper(),
@@ -32,13 +33,13 @@ namespace Portal
             var balance = await Program.Backend.GetBalances();
 
             foreach (var i in balance)
-                if (i.type == WalletType.TRADING)
-                    if (i.currency == "usd")
-                        BalanceBox.Text += i.amount.ToString("N2")
-                            + " ;    " + i.available.ToString("N2");
-
-            RefreshTimer.Enabled = true;
-            RefreshButton.Enabled = true;
+                if (i.amount > 0)
+                    BalanceView.Items.Add(new ListViewItem(new string[] {
+                        i.type.ToString(),
+                        i.currency.ToUpper(),
+                        i.amount.ToString("N2"),
+                        i.available.ToString("N2"),
+                    }));
         }
 
         private async void ExecuteButton_Click(object sender, EventArgs e)
@@ -51,15 +52,16 @@ namespace Portal
 
             var result = await Program.Backend.CreateOrder(symbol, amount, price, side, type);
 
-            MessageBox.Show("id:" + result.id.ToString());
+            MessageBox.Show("id: " + result.id.ToString());
             RefreshStatus();
         }
 
         private async void CancelButton_Click(object sender, EventArgs e)
         {
-            var result = await Program.Backend.CancelAllOrders();
+            long id = long.Parse(OidBox.Text);
+            var result = await Program.Backend.CancelOrder(id);
 
-            MessageBox.Show((string)result["result"]);
+            MessageBox.Show("id: " + result.id.ToString());
             RefreshStatus();
         }
 
@@ -75,6 +77,11 @@ namespace Portal
         private void PositionsView_ItemActivate(object sender, EventArgs e)
         {
             PidBox.Text = PositionsView.SelectedItems[0].Text;
+        }
+
+        private void OrdersView_ItemActivate(object sender, EventArgs e)
+        {
+            OidBox.Text = OrdersView.SelectedItems[0].Text;
         }
 
         private void RefreshButton_Click(object sender, EventArgs e)
@@ -102,6 +109,8 @@ namespace Portal
                     i.base_price.ToString("N2"),
                     (i.base_price * i.amount).ToString("N2"),
                     i.pl.ToString("N2"),
+                    i.swap.ToString("N2"),
+                    i.timestamp.ToLocalTime().ToString(),
                 }));
 
                 sum += i.pl;
@@ -114,6 +123,7 @@ namespace Portal
             OrdersView.Items.Clear();
             foreach (var i in orders)
                 OrdersView.Items.Add(new ListViewItem(new string[] {
+                    i.id.ToString(),
                     i.is_live.ToString(),
                     i.is_cancelled.ToString(),
                     i.symbol.ToUpper(),

@@ -113,6 +113,14 @@ namespace BitfinexAPI
             return await ProcessAuthenticated<BaseInfo>(args);
         }
 
+        public async Task<OrderInfo> CancelOrder(long id)
+        {
+            var args = GeneratePayload("/v1/order/cancel");
+            args.Add("order_id", id);
+
+            return await ProcessAuthenticated<OrderInfo>(args);
+        }
+
         public async Task<BaseInfo> ClosePosition(long id)
         {
             var args = GeneratePayload("/v1/position/close");
