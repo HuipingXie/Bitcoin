@@ -42,7 +42,8 @@ namespace Portal
 
             var result = await Program.Backend.CreateOrder(symbol, amount, price, side, type);
 
-            MessageBox.Show("ok");
+            MessageBox.Show("id:" + result.id.ToString());
+            RefreshTimer_Tick(null, null);
         }
 
         private async void CancelButton_Click(object sender, EventArgs e)
@@ -50,6 +51,7 @@ namespace Portal
             var result = await Program.Backend.CancelAllOrders();
 
             MessageBox.Show((string)result["result"]);
+            RefreshTimer_Tick(null, null);
         }
 
         private async void CloseButton_Click(object sender, EventArgs e)
@@ -58,6 +60,7 @@ namespace Portal
             var result = await Program.Backend.ClosePosition(id);
 
             MessageBox.Show((string)result["message"]);
+            RefreshTimer_Tick(null, null);
         }
 
         private void PositionsView_ItemActivate(object sender, EventArgs e)
@@ -91,13 +94,13 @@ namespace Portal
             OrdersView.Items.Clear();
             foreach (var i in orders)
                 OrdersView.Items.Add(new ListViewItem(new string[] {
+                    i.is_live.ToString(),
+                    i.is_cancelled.ToString(),
                     i.symbol.ToUpper(),
                     i.side.ToString(),
-                    i.price.GetValueOrDefault().ToString("N2"),
-                    i.original_amount.ToString("N2"),
+                    i.original_amount.ToString("N2") + " / " + i.executed_amount.ToString("N2"),
+                    i.price.GetValueOrDefault().ToString("N2") + " / " + i.avg_execution_price.ToString("N2"),
                     i.type.ToString(),
-                    i.avg_execution_price.ToString("N2"),
-                    i.executed_amount.ToString("N2"),
                     i.timestamp.ToLocalTime().ToString(),
                 }));
 

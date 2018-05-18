@@ -60,10 +60,10 @@
             this.columnHeader9 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader10 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader11 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader12 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader13 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader14 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.RefreshTimer = new System.Windows.Forms.Timer(this.components);
+            this.columnHeader12 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader13 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
             // RefreshButton
@@ -280,13 +280,13 @@
             // OrdersView
             // 
             this.OrdersView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader12,
+            this.columnHeader13,
             this.columnHeader7,
             this.columnHeader8,
             this.columnHeader9,
             this.columnHeader10,
             this.columnHeader11,
-            this.columnHeader12,
-            this.columnHeader13,
             this.columnHeader14});
             this.OrdersView.FullRowSelect = true;
             this.OrdersView.GridLines = true;
@@ -309,28 +309,18 @@
             // 
             // columnHeader9
             // 
-            this.columnHeader9.Text = "price";
+            this.columnHeader9.Text = "amount (o/e)";
             this.columnHeader9.Width = 90;
             // 
             // columnHeader10
             // 
-            this.columnHeader10.Text = "amount";
+            this.columnHeader10.Text = "price (o/e)";
             this.columnHeader10.Width = 90;
             // 
             // columnHeader11
             // 
             this.columnHeader11.Text = "type";
             this.columnHeader11.Width = 90;
-            // 
-            // columnHeader12
-            // 
-            this.columnHeader12.Text = "exe price";
-            this.columnHeader12.Width = 90;
-            // 
-            // columnHeader13
-            // 
-            this.columnHeader13.Text = "exe amount";
-            this.columnHeader13.Width = 90;
             // 
             // columnHeader14
             // 
@@ -341,6 +331,14 @@
             // 
             this.RefreshTimer.Interval = 60000;
             this.RefreshTimer.Tick += new System.EventHandler(this.RefreshTimer_Tick);
+            // 
+            // columnHeader12
+            // 
+            this.columnHeader12.Text = "living";
+            // 
+            // columnHeader13
+            // 
+            this.columnHeader13.Text = "cancelled";
             // 
             // MainForm
             // 
@@ -406,10 +404,10 @@
         private System.Windows.Forms.ColumnHeader columnHeader9;
         private System.Windows.Forms.ColumnHeader columnHeader10;
         private System.Windows.Forms.ColumnHeader columnHeader11;
-        private System.Windows.Forms.ColumnHeader columnHeader12;
-        private System.Windows.Forms.ColumnHeader columnHeader13;
         private System.Windows.Forms.ColumnHeader columnHeader14;
         private System.Windows.Forms.Timer RefreshTimer;
+        private System.Windows.Forms.ColumnHeader columnHeader12;
+        private System.Windows.Forms.ColumnHeader columnHeader13;
     }
 }
 
