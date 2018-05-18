@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Windows.Forms;
 
 using BitfinexAPI;
@@ -8,28 +7,38 @@ namespace Portal
 {
     public partial class MainForm : Form
     {
-        private List<BalanceInfo> _balance;
-        private List<OrderInfo> _orders;
-
         public MainForm()
         {
             InitializeComponent();
-
             Init();
         }
 
         private async void Init()
         {
-            _orders = await Program.Backend.GetOrdersHistory();
-            _balance = await Program.Backend.GetBalances();
+            var orders = await Program.Backend.GetOrdersHistory();
+
+            foreach (var i in orders)
+                TradesView.Items.Add(new ListViewItem(new string[] {
+                    i.is_live.ToString(),
+                    i.is_cancelled.ToString(),
+                    i.symbol.ToUpper(),
+                    i.side.ToString(),
+                    i.original_amount.ToString("N2") + " / " + i.executed_amount.ToString("N2"),
+                    i.price.GetValueOrDefault().ToString("N2") + " / " + i.avg_execution_price.ToString("N2"),
+                    i.type.ToString(),
+                    i.timestamp.ToLocalTime().ToString(),
+                }));
+
+            var balance = await Program.Backend.GetBalances();
+
+            foreach (var i in balance)
+                if (i.type == WalletType.TRADING)
+                    if (i.currency == "usd")
+                        BalanceBox.Text += i.amount.ToString("N2")
+                            + " ;    " + i.available.ToString("N2");
 
             RefreshTimer.Enabled = true;
             RefreshButton.Enabled = true;
-        }
-
-        private void RefreshButton_Click(object sender, EventArgs e)
-        {
-            RefreshTimer_Tick(null, null);
         }
 
         private async void ExecuteButton_Click(object sender, EventArgs e)
@@ -43,7 +52,7 @@ namespace Portal
             var result = await Program.Backend.CreateOrder(symbol, amount, price, side, type);
 
             MessageBox.Show("id:" + result.id.ToString());
-            RefreshTimer_Tick(null, null);
+            RefreshStatus();
         }
 
         private async void CancelButton_Click(object sender, EventArgs e)
@@ -51,7 +60,7 @@ namespace Portal
             var result = await Program.Backend.CancelAllOrders();
 
             MessageBox.Show((string)result["result"]);
-            RefreshTimer_Tick(null, null);
+            RefreshStatus();
         }
 
         private async void CloseButton_Click(object sender, EventArgs e)
@@ -60,7 +69,7 @@ namespace Portal
             var result = await Program.Backend.ClosePosition(id);
 
             MessageBox.Show((string)result["message"]);
-            RefreshTimer_Tick(null, null);
+            RefreshStatus();
         }
 
         private void PositionsView_ItemActivate(object sender, EventArgs e)
@@ -68,7 +77,17 @@ namespace Portal
             PidBox.Text = PositionsView.SelectedItems[0].Text;
         }
 
-        private async void RefreshTimer_Tick(object sender, EventArgs e)
+        private void RefreshButton_Click(object sender, EventArgs e)
+        {
+            RefreshStatus();
+        }
+
+        private void RefreshTimer_Tick(object sender, EventArgs e)
+        {
+            RefreshStatus();
+        }
+
+        private async void RefreshStatus()
         {
             var positions = await Program.Backend.GetActivePositions();
 
@@ -88,8 +107,9 @@ namespace Portal
                 sum += i.pl;
             }
 
+            FloatBox.Text = sum.ToString("N2");
+
             var orders = await Program.Backend.GetActiveOrders();
-            orders.AddRange(_orders);
 
             OrdersView.Items.Clear();
             foreach (var i in orders)
@@ -103,13 +123,6 @@ namespace Portal
                     i.type.ToString(),
                     i.timestamp.ToLocalTime().ToString(),
                 }));
-
-            BalanceBox.Text = "float: " + sum.ToString("N2");
-            foreach (var i in _balance)
-                if (i.type == WalletType.TRADING)
-                    if (i.currency == "usd")
-                        BalanceBox.Text += "      deposit: " + i.amount.ToString("N2")
-                            + "      available: " + i.available.ToString("N2");
         }
     }
 }

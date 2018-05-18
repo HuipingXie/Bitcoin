@@ -55,6 +55,8 @@
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.OrdersView = new System.Windows.Forms.ListView();
+            this.columnHeader12 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader13 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader9 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -62,8 +64,17 @@
             this.columnHeader11 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader14 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.RefreshTimer = new System.Windows.Forms.Timer(this.components);
-            this.columnHeader12 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader13 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.FloatBox = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.TradesView = new System.Windows.Forms.ListView();
+            this.columnHeader15 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader16 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader17 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader18 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader19 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader20 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader21 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader22 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
             // RefreshButton
@@ -194,9 +205,9 @@
             // 
             // CloseButton
             // 
-            this.CloseButton.Location = new System.Drawing.Point(264, 600);
+            this.CloseButton.Location = new System.Drawing.Point(264, 590);
             this.CloseButton.Name = "CloseButton";
-            this.CloseButton.Size = new System.Drawing.Size(164, 35);
+            this.CloseButton.Size = new System.Drawing.Size(164, 55);
             this.CloseButton.TabIndex = 107;
             this.CloseButton.Text = "Close Position";
             this.CloseButton.UseVisualStyleBackColor = true;
@@ -213,16 +224,16 @@
             // 
             // BalanceBox
             // 
-            this.BalanceBox.Location = new System.Drawing.Point(598, 604);
+            this.BalanceBox.Location = new System.Drawing.Point(835, 604);
             this.BalanceBox.Name = "BalanceBox";
             this.BalanceBox.ReadOnly = true;
-            this.BalanceBox.Size = new System.Drawing.Size(542, 26);
+            this.BalanceBox.Size = new System.Drawing.Size(305, 26);
             this.BalanceBox.TabIndex = 109;
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(523, 607);
+            this.label7.Location = new System.Drawing.Point(760, 607);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(69, 20);
             this.label7.TabIndex = 110;
@@ -297,30 +308,36 @@
             this.OrdersView.UseCompatibleStateImageBehavior = false;
             this.OrdersView.View = System.Windows.Forms.View.Details;
             // 
+            // columnHeader12
+            // 
+            this.columnHeader12.Text = "living";
+            // 
+            // columnHeader13
+            // 
+            this.columnHeader13.Text = "cancelled";
+            // 
             // columnHeader7
             // 
             this.columnHeader7.Text = "symbol";
-            this.columnHeader7.Width = 90;
             // 
             // columnHeader8
             // 
             this.columnHeader8.Text = "side";
-            this.columnHeader8.Width = 90;
             // 
             // columnHeader9
             // 
             this.columnHeader9.Text = "amount (o/e)";
-            this.columnHeader9.Width = 90;
+            this.columnHeader9.Width = 120;
             // 
             // columnHeader10
             // 
             this.columnHeader10.Text = "price (o/e)";
-            this.columnHeader10.Width = 90;
+            this.columnHeader10.Width = 120;
             // 
             // columnHeader11
             // 
             this.columnHeader11.Text = "type";
-            this.columnHeader11.Width = 90;
+            this.columnHeader11.Width = 120;
             // 
             // columnHeader14
             // 
@@ -332,19 +349,87 @@
             this.RefreshTimer.Interval = 60000;
             this.RefreshTimer.Tick += new System.EventHandler(this.RefreshTimer_Tick);
             // 
-            // columnHeader12
+            // FloatBox
             // 
-            this.columnHeader12.Text = "living";
+            this.FloatBox.Location = new System.Drawing.Point(571, 604);
+            this.FloatBox.Name = "FloatBox";
+            this.FloatBox.ReadOnly = true;
+            this.FloatBox.Size = new System.Drawing.Size(137, 26);
+            this.FloatBox.TabIndex = 113;
             // 
-            // columnHeader13
+            // label8
             // 
-            this.columnHeader13.Text = "cancelled";
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(521, 607);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(44, 20);
+            this.label8.TabIndex = 114;
+            this.label8.Text = "float:";
+            // 
+            // TradesView
+            // 
+            this.TradesView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader15,
+            this.columnHeader16,
+            this.columnHeader17,
+            this.columnHeader18,
+            this.columnHeader19,
+            this.columnHeader20,
+            this.columnHeader21,
+            this.columnHeader22});
+            this.TradesView.FullRowSelect = true;
+            this.TradesView.GridLines = true;
+            this.TradesView.Location = new System.Drawing.Point(12, 683);
+            this.TradesView.Name = "TradesView";
+            this.TradesView.Size = new System.Drawing.Size(1153, 220);
+            this.TradesView.TabIndex = 115;
+            this.TradesView.UseCompatibleStateImageBehavior = false;
+            this.TradesView.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader15
+            // 
+            this.columnHeader15.Text = "living";
+            // 
+            // columnHeader16
+            // 
+            this.columnHeader16.Text = "cancelled";
+            // 
+            // columnHeader17
+            // 
+            this.columnHeader17.Text = "symbol";
+            // 
+            // columnHeader18
+            // 
+            this.columnHeader18.Text = "side";
+            // 
+            // columnHeader19
+            // 
+            this.columnHeader19.Text = "amount (o/e)";
+            this.columnHeader19.Width = 120;
+            // 
+            // columnHeader20
+            // 
+            this.columnHeader20.Text = "price (o/e)";
+            this.columnHeader20.Width = 120;
+            // 
+            // columnHeader21
+            // 
+            this.columnHeader21.Text = "type";
+            this.columnHeader21.Width = 120;
+            // 
+            // columnHeader22
+            // 
+            this.columnHeader22.Text = "timestamp";
+            this.columnHeader22.Width = 120;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1177, 679);
+            this.ClientSize = new System.Drawing.Size(1177, 915);
+            this.Controls.Add(this.TradesView);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.FloatBox);
             this.Controls.Add(this.OrdersView);
             this.Controls.Add(this.PositionsView);
             this.Controls.Add(this.label7);
@@ -408,6 +493,17 @@
         private System.Windows.Forms.Timer RefreshTimer;
         private System.Windows.Forms.ColumnHeader columnHeader12;
         private System.Windows.Forms.ColumnHeader columnHeader13;
+        private System.Windows.Forms.TextBox FloatBox;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.ListView TradesView;
+        private System.Windows.Forms.ColumnHeader columnHeader15;
+        private System.Windows.Forms.ColumnHeader columnHeader16;
+        private System.Windows.Forms.ColumnHeader columnHeader17;
+        private System.Windows.Forms.ColumnHeader columnHeader18;
+        private System.Windows.Forms.ColumnHeader columnHeader19;
+        private System.Windows.Forms.ColumnHeader columnHeader20;
+        private System.Windows.Forms.ColumnHeader columnHeader21;
+        private System.Windows.Forms.ColumnHeader columnHeader22;
     }
 }
 
