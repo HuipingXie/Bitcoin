@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 using BitfinexAPI;
@@ -7,51 +8,22 @@ namespace Portal
 {
     public partial class MainForm : Form
     {
+        private List<BalanceInfo> _balance;
+        private List<OrderInfo> _orders;
+
         public MainForm()
         {
             InitializeComponent();
+
+            RefreshButton_Click(null, null);
         }
 
         private async void RefreshButton_Click(object sender, EventArgs e)
         {
-            var positions = await Program.Backend.GetActivePositions();
+            _orders = await Program.Backend.GetOrdersHistory();
+            _balance = await Program.Backend.GetBalances();
 
-            decimal sum = 0;
-            PositionsView.Items.Clear();
-            foreach (var i in positions)
-            {
-                PositionsView.Items.Add(new ListViewItem(new string[]{
-                    i.id.ToString(),
-                    i.symbol.ToUpper(),
-                    i.amount.ToString("N2"),
-                    i.base_price.ToString("N2"),
-                    (i.base_price * i.amount).ToString("N2"),
-                    i.pl.ToString("N2")
-                }));
-
-                sum += i.pl;
-            }
-
-            var orders = await Program.Backend.GetActiveOrders();
-
-            OrdersBox.Text = "";
-            foreach (var i in orders)
-                OrdersBox.Text += i.symbol
-                    + "  " + i.remaining_amount.ToString("N2")
-                    + "  " + i.side
-                    + "  " + i.avg_execution_price.ToString("N2")
-                    + "  " + i.type
-                    + "  " + i.timestamp
-                    + "\r\n";
-
-            var balance = await Program.Backend.GetBalances();
-
-            BalanceBox.Text = "float: " + sum.ToString("N2");
-            foreach (var i in balance)
-                if (i.type == WalletType.TRADING)
-                    if (i.currency == "usd")
-                        BalanceBox.Text += "      deposit: " + i.amount.ToString("N2")
-                            + " ;    " + i.available.ToString("N2");
+            RefreshTimer_Tick(null, null);
         }
 
         private async void ExecuteButton_Click(object sender, EventArgs e)
@@ -85,6 +57,50 @@ namespace Portal
         private void PositionsView_ItemActivate(object sender, EventArgs e)
         {
             PidBox.Text = PositionsView.SelectedItems[0].Text;
+        }
+
+        private async void RefreshTimer_Tick(object sender, EventArgs e)
+        {
+            var positions = await Program.Backend.GetActivePositions();
+
+            decimal sum = 0;
+            PositionsView.Items.Clear();
+            foreach (var i in positions)
+            {
+                PositionsView.Items.Add(new ListViewItem(new string[]{
+                    i.id.ToString(),
+                    i.symbol.ToUpper(),
+                    i.amount.ToString("N2"),
+                    i.base_price.ToString("N2"),
+                    (i.base_price * i.amount).ToString("N2"),
+                    i.pl.ToString("N2"),
+                }));
+
+                sum += i.pl;
+            }
+
+            var orders = await Program.Backend.GetActiveOrders();
+            orders.AddRange(_orders);
+
+            OrdersView.Items.Clear();
+            foreach (var i in orders)
+                OrdersView.Items.Add(new ListViewItem(new string[] {
+                    i.symbol.ToUpper(),
+                    i.side.ToString(),
+                    i.price.GetValueOrDefault().ToString("N2"),
+                    i.original_amount.ToString("N2"),
+                    i.type.ToString(),
+                    i.avg_execution_price.ToString("N2"),
+                    i.executed_amount.ToString("N2"),
+                    i.timestamp.ToLocalTime().ToString(),
+                }));
+
+            BalanceBox.Text = "float: " + sum.ToString("N2");
+            foreach (var i in _balance)
+                if (i.type == WalletType.TRADING)
+                    if (i.currency == "usd")
+                        BalanceBox.Text += "      deposit: " + i.amount.ToString("N2")
+                            + "      available: " + i.available.ToString("N2");
         }
     }
 }
