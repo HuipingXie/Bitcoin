@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.PositionsBox = new System.Windows.Forms.TextBox();
             this.OrdersBox = new System.Windows.Forms.TextBox();
             this.RefreshButton = new System.Windows.Forms.Button();
             this.AmountBox = new System.Windows.Forms.TextBox();
@@ -42,23 +41,20 @@
             this.label4 = new System.Windows.Forms.Label();
             this.PriceBox = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.CancelBox = new System.Windows.Forms.Button();
+            this.CancelButton = new System.Windows.Forms.Button();
             this.PidBox = new System.Windows.Forms.TextBox();
             this.CloseButton = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.BalanceBox = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
+            this.PositionsView = new System.Windows.Forms.ListView();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
-            // 
-            // PositionsBox
-            // 
-            this.PositionsBox.Location = new System.Drawing.Point(12, 43);
-            this.PositionsBox.Multiline = true;
-            this.PositionsBox.Name = "PositionsBox";
-            this.PositionsBox.ReadOnly = true;
-            this.PositionsBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.PositionsBox.Size = new System.Drawing.Size(707, 259);
-            this.PositionsBox.TabIndex = 0;
             // 
             // OrdersBox
             // 
@@ -178,15 +174,15 @@
             this.label5.TabIndex = 14;
             this.label5.Text = "price";
             // 
-            // CancelBox
+            // CancelButton
             // 
-            this.CancelBox.Location = new System.Drawing.Point(727, 461);
-            this.CancelBox.Name = "CancelBox";
-            this.CancelBox.Size = new System.Drawing.Size(114, 38);
-            this.CancelBox.TabIndex = 15;
-            this.CancelBox.Text = "Cancel All";
-            this.CancelBox.UseVisualStyleBackColor = true;
-            this.CancelBox.Click += new System.EventHandler(this.CancelBox_Click);
+            this.CancelButton.Location = new System.Drawing.Point(727, 461);
+            this.CancelButton.Name = "CancelButton";
+            this.CancelButton.Size = new System.Drawing.Size(114, 38);
+            this.CancelButton.TabIndex = 15;
+            this.CancelButton.Text = "Cancel All";
+            this.CancelButton.UseVisualStyleBackColor = true;
+            this.CancelButton.Click += new System.EventHandler(this.CancelButton_Click);
             // 
             // PidBox
             // 
@@ -231,17 +227,67 @@
             this.label7.TabIndex = 110;
             this.label7.Text = "balance:";
             // 
+            // PositionsView
+            // 
+            this.PositionsView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1,
+            this.columnHeader2,
+            this.columnHeader3,
+            this.columnHeader4,
+            this.columnHeader5,
+            this.columnHeader6});
+            this.PositionsView.FullRowSelect = true;
+            this.PositionsView.GridLines = true;
+            this.PositionsView.Location = new System.Drawing.Point(12, 12);
+            this.PositionsView.Name = "PositionsView";
+            this.PositionsView.Size = new System.Drawing.Size(707, 290);
+            this.PositionsView.TabIndex = 111;
+            this.PositionsView.UseCompatibleStateImageBehavior = false;
+            this.PositionsView.View = System.Windows.Forms.View.Details;
+            this.PositionsView.ItemActivate += new System.EventHandler(this.PositionsView_ItemActivate);
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "id";
+            this.columnHeader1.Width = 75;
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "symbol";
+            this.columnHeader2.Width = 75;
+            // 
+            // columnHeader3
+            // 
+            this.columnHeader3.Text = "amount";
+            this.columnHeader3.Width = 75;
+            // 
+            // columnHeader4
+            // 
+            this.columnHeader4.Text = "base price";
+            this.columnHeader4.Width = 75;
+            // 
+            // columnHeader5
+            // 
+            this.columnHeader5.Text = "value";
+            this.columnHeader5.Width = 75;
+            // 
+            // columnHeader6
+            // 
+            this.columnHeader6.Text = "p/l";
+            this.columnHeader6.Width = 75;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(945, 632);
+            this.Controls.Add(this.PositionsView);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.BalanceBox);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.CloseButton);
             this.Controls.Add(this.PidBox);
-            this.Controls.Add(this.CancelBox);
+            this.Controls.Add(this.CancelButton);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.PriceBox);
             this.Controls.Add(this.label4);
@@ -255,7 +301,6 @@
             this.Controls.Add(this.AmountBox);
             this.Controls.Add(this.RefreshButton);
             this.Controls.Add(this.OrdersBox);
-            this.Controls.Add(this.PositionsBox);
             this.Name = "MainForm";
             this.Text = "Bitcoin";
             this.ResumeLayout(false);
@@ -264,8 +309,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.TextBox PositionsBox;
         private System.Windows.Forms.TextBox OrdersBox;
         private System.Windows.Forms.Button RefreshButton;
         private System.Windows.Forms.TextBox AmountBox;
@@ -279,12 +322,19 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox PriceBox;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Button CancelBox;
+        private System.Windows.Forms.Button CancelButton;
         private System.Windows.Forms.TextBox PidBox;
         private System.Windows.Forms.Button CloseButton;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox BalanceBox;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.ListView PositionsView;
+        private System.Windows.Forms.ColumnHeader columnHeader1;
+        private System.Windows.Forms.ColumnHeader columnHeader2;
+        private System.Windows.Forms.ColumnHeader columnHeader3;
+        private System.Windows.Forms.ColumnHeader columnHeader4;
+        private System.Windows.Forms.ColumnHeader columnHeader5;
+        private System.Windows.Forms.ColumnHeader columnHeader6;
     }
 }
 

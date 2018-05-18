@@ -17,16 +17,17 @@ namespace Portal
             var positions = await Program.Backend.GetActivePositions();
 
             decimal sum = 0;
-            PositionsBox.Text = "";
+            PositionsView.Items.Clear();
             foreach (var i in positions)
             {
-                PositionsBox.Text += i.id
-                    + "    " + i.symbol.ToUpper()
-                    + "    " + i.amount.ToString("N2")
-                    + "    " + i.base_price.ToString("N2")
-                    + "    " + (i.base_price * i.amount).ToString("N2")
-                    + "    " + i.pl.ToString("N2")
-                    + "\r\n";
+                PositionsView.Items.Add(new ListViewItem(new string[]{
+                    i.id.ToString(),
+                    i.symbol.ToUpper(),
+                    i.amount.ToString("N2"),
+                    i.base_price.ToString("N2"),
+                    (i.base_price * i.amount).ToString("N2"),
+                    i.pl.ToString("N2")
+                }));
 
                 sum += i.pl;
             }
@@ -45,13 +46,12 @@ namespace Portal
 
             var balance = await Program.Backend.GetBalances();
 
-            BalanceBox.Text = "net: " + sum.ToString("N2");
+            BalanceBox.Text = "float: " + sum.ToString("N2");
             foreach (var i in balance)
                 if (i.type == WalletType.TRADING)
                     if (i.currency == "usd")
-                        BalanceBox.Text += "      " + i.currency.ToUpper()
-                            + ": " + i.amount.ToString("N2")
-                            + ";    " + i.available.ToString("N2");
+                        BalanceBox.Text += "      deposit: " + i.amount.ToString("N2")
+                            + " ;    " + i.available.ToString("N2");
         }
 
         private async void ExecuteButton_Click(object sender, EventArgs e)
@@ -67,7 +67,7 @@ namespace Portal
             MessageBox.Show("ok");
         }
 
-        private async void CancelBox_Click(object sender, EventArgs e)
+        private async void CancelButton_Click(object sender, EventArgs e)
         {
             var result = await Program.Backend.CancelAllOrders();
 
@@ -80,6 +80,11 @@ namespace Portal
             var result = await Program.Backend.ClosePosition(id);
 
             MessageBox.Show((string)result["message"]);
+        }
+
+        private void PositionsView_ItemActivate(object sender, EventArgs e)
+        {
+            PidBox.Text = PositionsView.SelectedItems[0].Text;
         }
     }
 }
