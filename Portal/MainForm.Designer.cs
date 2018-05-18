@@ -68,6 +68,7 @@
             // 
             // RefreshButton
             // 
+            this.RefreshButton.Enabled = false;
             this.RefreshButton.Location = new System.Drawing.Point(967, 110);
             this.RefreshButton.Name = "RefreshButton";
             this.RefreshButton.Size = new System.Drawing.Size(114, 97);
@@ -339,7 +340,7 @@
             // RefreshTimer
             // 
             this.RefreshTimer.Enabled = true;
-            this.RefreshTimer.Interval = 10000;
+            this.RefreshTimer.Interval = 60000;
             this.RefreshTimer.Tick += new System.EventHandler(this.RefreshTimer_Tick);
             // 
             // MainForm
