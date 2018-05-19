@@ -10,6 +10,19 @@ namespace BitfinexAPI
     {
     }
 
+    public class TickerInfo
+    {
+        public decimal mid;
+        public decimal bid;
+        public decimal ask;
+        public decimal last_price;
+        public decimal low;
+        public decimal high;
+        public decimal volume;
+        [JsonConverter(typeof(V1TimeConverter))]
+        public DateTime timestamp;
+    }
+
     public class TransactionInfo
     {
         public decimal price;
@@ -79,6 +92,24 @@ namespace BitfinexAPI
         public decimal original_amount;
         public decimal remaining_amount;
         public decimal executed_amount;
+    }
+
+    public class AssetMovementInfo
+    {
+        public long id;
+        public string txid;
+        public string currency;
+        public string method;
+        public string type;
+        public decimal amount;
+        public string description;
+        public string address;
+        public string status;
+        [JsonConverter(typeof(V1TimeConverter))]
+        public DateTime timestamp;
+        [JsonConverter(typeof(V1TimeConverter))]
+        public DateTime timestamp_created;
+        public decimal fee;
     }
 
     [JsonConverter(typeof(KlineConverter))]

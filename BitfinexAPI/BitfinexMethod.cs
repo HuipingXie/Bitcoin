@@ -40,6 +40,11 @@ namespace BitfinexAPI
             return await ProcessPublic<List<string>>("/v1/symbols");
         }
 
+        public async Task<TickerInfo> GetTicker(string symbol)
+        {
+            return await ProcessPublic<TickerInfo>("/v1/pubticker/" + symbol.ToLower());
+        }
+
         public async Task<List<TransactionInfo>> GetTrades(string symbol)
         {
             return await ProcessPublic<List<TransactionInfo>>("/v1/trades/" + symbol.ToLower());
@@ -72,6 +77,14 @@ namespace BitfinexAPI
         {
             var args = GeneratePayload("/v1/positions");
             return await ProcessAuthenticated<List<PositionInfo>>(args);
+        }
+
+        public async Task<List<AssetMovementInfo>> GetAssetMovements(string currency)
+        {
+            var args = GeneratePayload("/v1/history/movements");
+            args.Add("currency", currency);
+
+            return await ProcessAuthenticated<List<AssetMovementInfo>>(args);
         }
 
         public async Task<List<BaseInfo>> TransferWallets(
