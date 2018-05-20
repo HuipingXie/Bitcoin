@@ -72,7 +72,7 @@ namespace BitfinexAPI
         {
             var o = JArray.Load(reader);
 
-            return new TradeInfo()
+            return new TradeRecordInfo()
             {
                 id = Convert.ToInt64(o[0]),
                 timestamp = DateTimeOffset.FromUnixTimeMilliseconds(Convert.ToInt64(o[1])).DateTime,

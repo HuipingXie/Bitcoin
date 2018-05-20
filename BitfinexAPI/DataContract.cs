@@ -23,18 +23,6 @@ namespace BitfinexAPI
         public DateTime timestamp;
     }
 
-    public class TransactionInfo
-    {
-        public decimal price;
-        public decimal amount;
-        [JsonConverter(typeof(V1TimeConverter))]
-        public DateTime timestamp;
-        [JsonConverter(typeof(StringEnumConverter))]
-        public OrderSide type;
-        public long tid;
-        public string exchange;
-    }
-
     public class PairInfo
     {
         public decimal price;
@@ -49,27 +37,19 @@ namespace BitfinexAPI
         public List<PairInfo> bids;
     }
 
-    public class BalanceInfo
+    public class TradeInfo : PairInfo
     {
         [JsonConverter(typeof(StringEnumConverter))]
-        public WalletType type;
-        public string currency;
-        public decimal amount;
-        public decimal available;
+        public OrderSide type;
+        public long tid;
+        public string exchange;
     }
 
-    public class PositionInfo
+    public class TransactionInfo : TradeInfo
     {
-        public long id;
-        public string symbol;
-        public string status;
-        [JsonProperty("base")]
-        public decimal base_price;
-        public decimal amount;
-        [JsonConverter(typeof(V1TimeConverter))]
-        public DateTime timestamp;
-        public decimal swap;
-        public decimal pl;
+        public string fee_currency;
+        public decimal fee_amount;
+        public long order_id;
     }
 
     public class OrderInfo
@@ -92,6 +72,29 @@ namespace BitfinexAPI
         public decimal original_amount;
         public decimal remaining_amount;
         public decimal executed_amount;
+    }
+
+    public class PositionInfo
+    {
+        public long id;
+        public string symbol;
+        public string status;
+        [JsonProperty("base")]
+        public decimal base_price;
+        public decimal amount;
+        [JsonConverter(typeof(V1TimeConverter))]
+        public DateTime timestamp;
+        public decimal swap;
+        public decimal pl;
+    }
+
+    public class BalanceInfo
+    {
+        [JsonConverter(typeof(StringEnumConverter))]
+        public WalletType type;
+        public string currency;
+        public decimal amount;
+        public decimal available;
     }
 
     public class AssetMovementInfo
@@ -124,7 +127,7 @@ namespace BitfinexAPI
     }
 
     [JsonConverter(typeof(TradeConverter))]
-    public class TradeInfo
+    public class TradeRecordInfo
     {
         public long id;
         public DateTime timestamp;

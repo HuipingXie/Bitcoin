@@ -45,9 +45,9 @@ namespace BitfinexAPI
             return await ProcessPublic<TickerInfo>("/v1/pubticker/" + symbol.ToLower());
         }
 
-        public async Task<List<TransactionInfo>> GetTrades(string symbol)
+        public async Task<List<TradeInfo>> GetTrades(string symbol)
         {
-            return await ProcessPublic<List<TransactionInfo>>("/v1/trades/" + symbol.ToLower());
+            return await ProcessPublic<List<TradeInfo>>("/v1/trades/" + symbol.ToLower());
         }
 
         public async Task<OrderBookInfo> GetOrderBook(string symbol)
@@ -79,10 +79,18 @@ namespace BitfinexAPI
             return await ProcessAuthenticated<List<PositionInfo>>(args);
         }
 
+        public async Task<List<TransactionInfo>> GetTradeRecords(string symbol)
+        {
+            var args = GeneratePayload("/v1/mytrades");
+            args.Add("symbol", symbol.ToLower());
+
+            return await ProcessAuthenticated<List<TransactionInfo>>(args);
+        }
+
         public async Task<List<AssetMovementInfo>> GetAssetMovements(string currency)
         {
             var args = GeneratePayload("/v1/history/movements");
-            args.Add("currency", currency);
+            args.Add("currency", currency.ToUpper());
 
             return await ProcessAuthenticated<List<AssetMovementInfo>>(args);
         }
@@ -95,7 +103,7 @@ namespace BitfinexAPI
         {
             var args = GeneratePayload("/v1/transfer");
             args.Add("amount", amount.ToString());
-            args.Add("currency", currency);
+            args.Add("currency", currency.ToUpper());
             args.Add("walletfrom", ConvertHelper.ObtainEnumValue(walletfrom));
             args.Add("walletto", ConvertHelper.ObtainEnumValue(walletto));
 
@@ -111,7 +119,7 @@ namespace BitfinexAPI
         {
             var args = GeneratePayload("/v1/order/new");
             args.Add("exchange", "bitfinex");
-            args.Add("symbol", symbol.ToUpper());
+            args.Add("symbol", symbol.ToLower());
             args.Add("amount", amount.ToString());
             args.Add("price", price.ToString());
             args.Add("side", ConvertHelper.ObtainEnumValue(side));
@@ -163,7 +171,7 @@ namespace BitfinexAPI
             return await ProcessPublic<List<KlineInfo>>(path);
         }
 
-        public async Task<List<TradeInfo>> GetHistoryTrades(
+        public async Task<List<TradeRecordInfo>> GetHistoryTrades(
             string symbol,
             DateTime start,
             DateTime end,
@@ -178,7 +186,7 @@ namespace BitfinexAPI
                 + "&end=" + e.ToString()
                 + "&sort=1";
 
-            return await ProcessPublic<List<TradeInfo>>(path);
+            return await ProcessPublic<List<TradeRecordInfo>>(path);
         }
     }
 }
