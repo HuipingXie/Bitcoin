@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Portal", "Portal\Portal.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BitfinexAPI", "BitfinexAPI\BitfinexAPI.csproj", "{9EB53EC3-EF0A-4E79-B0C8-B8F0CB3F781E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SqlUtility", "SqlUtility\SqlUtility.csproj", "{2D550A7C-A393-450E-939E-5A55EF102970}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{9EB53EC3-EF0A-4E79-B0C8-B8F0CB3F781E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9EB53EC3-EF0A-4E79-B0C8-B8F0CB3F781E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9EB53EC3-EF0A-4E79-B0C8-B8F0CB3F781E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D550A7C-A393-450E-939E-5A55EF102970}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D550A7C-A393-450E-939E-5A55EF102970}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D550A7C-A393-450E-939E-5A55EF102970}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D550A7C-A393-450E-939E-5A55EF102970}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
