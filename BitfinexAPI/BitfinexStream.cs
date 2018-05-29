@@ -34,6 +34,24 @@ namespace BitfinexAPI
             });
         }
 
+        public void RetrieveOrderBooks(Action<PairInfo> handler, string symbol, string precision)
+        {
+            var args = GeneratePayload("book");
+            args.Add("pair", symbol.ToUpper());
+            args.Add("prec", precision);
+
+            AccessWebSocket.Subscribe(args, o =>
+            {
+                if (o.Count == 4)
+                    handler(new PairInfo()
+                    {
+                        amount = (decimal)o[o.Count - 1],
+                        price = (decimal)o[o.Count - 3],
+                        timestamp = DateTime.UtcNow,
+                    });
+            });
+        }
+
         ~BitfinexStream()
         {
         }
