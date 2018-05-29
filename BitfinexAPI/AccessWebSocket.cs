@@ -1,52 +1,55 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using WebSocketSharp;
 
 namespace BitfinexAPI
 {
     static class AccessWebSocket
     {
-        const string endpointBase = "wss://api.bitfinex.com/ws";
+        const string Endpoint = "wss://api.bitfinex.com/ws";
 
-        static Dictionary<string, WebSocket> _socketPool;
+        static Dictionary<int, WebSocket> _socketPool;
+        static int _socketIdCounter;
 
         static AccessWebSocket()
         {
-            _socketPool = new Dictionary<string, WebSocket>();
+            _socketPool = new Dictionary<int, WebSocket>();
+            _socketIdCounter = 0;
         }
 
-        public static string Subscribe<T>(string args, Action<T> handler)
+        public static int Subscribe(BaseInfo args, Action<JArray> handler)
         {
-            WebSocket ws = new WebSocket(endpointBase + args);
+            WebSocket ws = new WebSocket(Endpoint);
+            //ws.SetProxy("http://localhost:1080", null, null);
 
             ws.OnMessage += (sender, message) =>
             {
-                //handler();
+                var data = JsonConvert.DeserializeObject(message.Data);
+
+                if (data is JArray)
+                    handler((JArray)data);
             };
 
             ws.OnError += (sender, error) =>
             {
-                throw new Exception("WebSocketException:" + typeof(T).FullName);
+                throw new Exception("WebSocketException:" + error.Message);
             };
 
             ws.Connect();
-            ws.Send(args);
 
-            string chanId = "";
-            _socketPool.Add(chanId, ws);
+            ws.Send(JsonConvert.SerializeObject(args));
 
-            return chanId;
+            _socketPool.Add(++_socketIdCounter, ws);
+            return _socketIdCounter;
         }
 
-        public static void Unsubscribe(string chanId)
+        public static void Unsubscribe(int socketId)
         {
-            _socketPool[chanId].Close();
-            _socketPool.Remove(chanId);
+            _socketPool[socketId].Close();
+            _socketPool.Remove(socketId);
         }
     }
 }
