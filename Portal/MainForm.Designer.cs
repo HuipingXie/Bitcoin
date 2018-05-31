@@ -159,6 +159,7 @@
             this.SideBox.Name = "SideBox";
             this.SideBox.Size = new System.Drawing.Size(145, 28);
             this.SideBox.TabIndex = 102;
+            this.SideBox.SelectedIndexChanged += new System.EventHandler(this.SideBox_SelectedIndexChanged);
             // 
             // TypeBox
             // 
@@ -172,6 +173,7 @@
             this.TypeBox.Name = "TypeBox";
             this.TypeBox.Size = new System.Drawing.Size(145, 28);
             this.TypeBox.TabIndex = 103;
+            this.TypeBox.SelectedIndexChanged += new System.EventHandler(this.TypeBox_SelectedIndexChanged);
             // 
             // label4
             // 

@@ -134,5 +134,33 @@ namespace Portal
                     i.timestamp.ToLocalTime().ToString(),
                 }));
         }
+
+        private void SideBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ExecuteButton.BackColor = System.Drawing.Color.White;
+
+            if (SideBox.SelectedItem as string == "BUY")
+                ExecuteButton.BackColor = System.Drawing.Color.Green;
+
+            if (SideBox.SelectedItem as string == "SELL")
+                ExecuteButton.BackColor = System.Drawing.Color.Red;
+        }
+
+        private void TypeBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if ((TypeBox.SelectedItem as string == "MARKET")
+                || (TypeBox.SelectedItem as string == "EXCHANGE_MARKET"))
+            {
+                PriceBox.Text = "1.00";
+                PriceBox.Enabled = false;
+            }
+
+            if ((TypeBox.SelectedItem as string == "LIMIT")
+                || (TypeBox.SelectedItem as string == "EXCHANGE_LIMIT"))
+            {
+                PriceBox.Text = "";
+                PriceBox.Enabled = true;
+            }
+        }
     }
 }
