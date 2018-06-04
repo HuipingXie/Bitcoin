@@ -24,8 +24,8 @@ namespace Portal
                     i.is_cancelled.ToString(),
                     i.symbol.ToUpper(),
                     i.side.ToString(),
-                    i.original_amount.ToString("N2") + " / " + i.executed_amount.ToString("N2"),
-                    i.price.GetValueOrDefault().ToString("N2") + " / " + i.avg_execution_price.ToString("N2"),
+                    i.original_amount.ToString("N4") + " / " + i.executed_amount.ToString("N4"),
+                    i.price.GetValueOrDefault().ToString("N4") + " / " + i.avg_execution_price.ToString("N4"),
                     i.type.ToString(),
                     i.timestamp.ToLocalTime().ToString(),
                 }));
@@ -37,8 +37,8 @@ namespace Portal
                     BalanceView.Items.Add(new ListViewItem(new string[] {
                         i.type.ToString(),
                         i.currency.ToUpper(),
-                        i.amount.ToString("N2"),
-                        i.available.ToString("N2"),
+                        i.amount.ToString("N4"),
+                        i.available.ToString("N4"),
                     }));
         }
 
@@ -105,18 +105,18 @@ namespace Portal
                 PositionsView.Items.Add(new ListViewItem(new string[]{
                     i.id.ToString(),
                     i.symbol.ToUpper(),
-                    i.amount.ToString("N2"),
-                    i.base_price.ToString("N2"),
-                    (i.base_price * i.amount).ToString("N2"),
-                    i.pl.ToString("N2"),
-                    i.swap.ToString("N2"),
+                    i.amount.ToString("N4"),
+                    i.base_price.ToString("N4"),
+                    (i.base_price * i.amount).ToString("N4"),
+                    i.pl.ToString("N4"),
+                    i.swap.ToString("N4"),
                     i.timestamp.ToLocalTime().ToString(),
                 }));
 
                 sum += i.pl;
             }
 
-            FloatBox.Text = sum.ToString("N2");
+            FloatBox.Text = sum.ToString("N4");
 
             var orders = await Program.Backend.GetActiveOrders();
 
@@ -128,8 +128,8 @@ namespace Portal
                     i.is_cancelled.ToString(),
                     i.symbol.ToUpper(),
                     i.side.ToString(),
-                    i.original_amount.ToString("N2") + " / " + i.executed_amount.ToString("N2"),
-                    i.price.GetValueOrDefault().ToString("N2") + " / " + i.avg_execution_price.ToString("N2"),
+                    i.original_amount.ToString("N4") + " / " + i.executed_amount.ToString("N4"),
+                    i.price.GetValueOrDefault().ToString("N4") + " / " + i.avg_execution_price.ToString("N4"),
                     i.type.ToString(),
                     i.timestamp.ToLocalTime().ToString(),
                 }));

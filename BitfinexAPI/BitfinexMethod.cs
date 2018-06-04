@@ -67,9 +67,9 @@ namespace BitfinexAPI
             return await ProcessAuthenticated<List<OrderInfo>>(args);
         }
 
-        public async Task<List<OrderInfo>> GetOrdersHistory()
+        public async Task<List<OrderInfo>> GetOrdersHistory(int limit = 100)
         {
-            var args = GeneratePayload("/v1/orders/hist");
+            var args = GeneratePayload("/v1/orders/hist?limit=" + limit.ToString());
             return await ProcessAuthenticated<List<OrderInfo>>(args);
         }
 
