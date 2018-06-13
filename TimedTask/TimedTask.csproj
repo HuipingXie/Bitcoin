@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{0BCCA3C2-3E26-476E-8ABD-374252AEDC9D}</ProjectGuid>
+    <ProjectGuid>{AB8D519F-F4F3-4280-B4D3-EE18F0C4CEF1}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>Test</RootNamespace>
-    <AssemblyName>Test</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <RootNamespace>TimedTask</RootNamespace>
+    <AssemblyName>TimedTask</AssemblyName>
+    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
@@ -32,37 +32,27 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
-    <Reference Include="websocket-sharp, Version=1.0.2.59611, Culture=neutral, PublicKeyToken=5660b08a1845a91e, processorArchitecture=MSIL">
-      <HintPath>..\packages\WebSocketSharp.1.0.3-rc11\lib\websocket-sharp.dll</HintPath>
-    </Reference>
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="HttpTest.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BinanceAPI\BinanceAPI.csproj">
-      <Project>{68327ca6-01e6-492b-b45c-927ca62632a8}</Project>
-      <Name>BinanceAPI</Name>
-    </ProjectReference>
     <ProjectReference Include="..\BitfinexAPI\BitfinexAPI.csproj">
       <Project>{9eb53ec3-ef0a-4e79-b0c8-b8f0cb3f781e}</Project>
       <Name>BitfinexAPI</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Portal\Portal.csproj">
-      <Project>{2d17d8de-64eb-4ef3-9655-10134f862484}</Project>
-      <Name>Portal</Name>
     </ProjectReference>
     <ProjectReference Include="..\SqlUtility\SqlUtility.csproj">
       <Project>{2d550a7c-a393-450e-939e-5a55ef102970}</Project>

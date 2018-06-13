@@ -13,6 +13,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BitfinexAPI", "BitfinexAPI\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SqlUtility", "SqlUtility\SqlUtility.csproj", "{2D550A7C-A393-450E-939E-5A55EF102970}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAPI", "WebAPI\WebAPI.csproj", "{51ADDFE0-7526-436F-BB2D-78A442D6ADCD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimedTask", "TimedTask\TimedTask.csproj", "{AB8D519F-F4F3-4280-B4D3-EE18F0C4CEF1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +43,14 @@ Global
 		{2D550A7C-A393-450E-939E-5A55EF102970}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2D550A7C-A393-450E-939E-5A55EF102970}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2D550A7C-A393-450E-939E-5A55EF102970}.Release|Any CPU.Build.0 = Release|Any CPU
+		{51ADDFE0-7526-436F-BB2D-78A442D6ADCD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51ADDFE0-7526-436F-BB2D-78A442D6ADCD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51ADDFE0-7526-436F-BB2D-78A442D6ADCD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51ADDFE0-7526-436F-BB2D-78A442D6ADCD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AB8D519F-F4F3-4280-B4D3-EE18F0C4CEF1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB8D519F-F4F3-4280-B4D3-EE18F0C4CEF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB8D519F-F4F3-4280-B4D3-EE18F0C4CEF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB8D519F-F4F3-4280-B4D3-EE18F0C4CEF1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
