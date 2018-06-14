@@ -4,6 +4,8 @@ using System.Windows.Forms;
 using System.Threading;
 
 using BitfinexAPI;
+using ServerAccess;
+
 
 namespace Portal
 {

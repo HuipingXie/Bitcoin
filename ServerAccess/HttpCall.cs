@@ -14,7 +14,7 @@ using System.Collections.Generic;
 /// </summary>
 
 
-namespace Portal
+namespace ServerAccess
 {
     static class HttpCall
     {

@@ -42,8 +42,6 @@
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GetServerResultMethod.cs" />
-    <Compile Include="HttpCall.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -82,6 +80,10 @@
     <ProjectReference Include="..\BitfinexAPI\BitfinexAPI.csproj">
       <Project>{9eb53ec3-ef0a-4e79-b0c8-b8f0cb3f781e}</Project>
       <Name>BitfinexAPI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ServerAccess\ServerAccess.csproj">
+      <Project>{cd34ba2b-74ef-4554-9836-805aace9ed90}</Project>
+      <Name>ServerAccess</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

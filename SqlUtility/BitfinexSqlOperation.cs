@@ -20,7 +20,7 @@ namespace SqlUtility
         //
         public BitfinexSqlOperation(string server,string user,string password,string database,string port,string charset)
         {
-            this.mc = new MysqlConnector(server, user, password, database);
+            this.mc = new MysqlConnector(server, user, password, database,port);
             this.mc.server = server;
             this.mc.userid = user;
             this.mc.password = password;
@@ -30,8 +30,6 @@ namespace SqlUtility
             
         }
 
-
-        
 
         //将DateTime转成int的时间戳
         private int GetTimeStamp(DateTime dt)

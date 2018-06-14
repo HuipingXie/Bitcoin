@@ -11,18 +11,6 @@ namespace SqlUtility
 {
     public class MysqlConnector
     {
-
-        //后续这些变量将从配置文件中获得
-
-        //string server = ConfigurationManager.AppSettings["Server"];
-        //string userid = ConfigurationManager.AppSettings["User"];
-        //string password = ConfigurationManager.AppSettings["Password"];
-        //string database = ConfigurationManager.AppSettings["Database"];
-        //string port = ConfigurationManager.AppSettings["Port"];
-        //string charset = ConfigurationManager.AppSettings["Charset"];
-
-
-
         public string server { set; get; }
         public string userid { set; get; }
         public string password { set; get; }
@@ -33,49 +21,14 @@ namespace SqlUtility
         public MysqlConnector() { }
 
         //有参构造函数
-        public MysqlConnector(string server, string userid, string password, string database)
+        public MysqlConnector(string server, string userid, string password, string database,string port)
         {
             this.server = server;
             this.userid = userid;
             this.password = password;
             this.database = database;
-        }
-
-        public MysqlConnector SetServer(string server)
-        {
-            this.server = server;
-            return this;
-        }
-
-        public MysqlConnector SetUserID(string userid)
-        {
-            this.userid = userid;
-            return this;
-        }
-
-        public MysqlConnector SetDataBase(string database)
-        {
-            this.database = database;
-            return this;
-        }
-
-        public MysqlConnector SetPassword(string password)
-        {
-            this.password = password;
-            return this;
-        }
-        public MysqlConnector SetPort(string port)
-        {
             this.port = port;
-            return this;
         }
-        public MysqlConnector SetCharset(string charset)
-        {
-            this.charset = charset;
-            return this;
-        }
-
-
 
         #region  建立MySql数据库连接
         /// <summary>

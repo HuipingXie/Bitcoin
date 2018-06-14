@@ -15,7 +15,7 @@ using BitfinexAPI;
 /// 这个类是用来嫁接原来的BitfinexAPI中的BitfinexMethod类的，将其中的方法进行改写
 /// </summary>
 
-namespace Portal
+namespace ServerAccess
 {
     static class ConvertHelper
     {

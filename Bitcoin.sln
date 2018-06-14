@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAPI", "WebAPI\WebAPI.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimedTask", "TimedTask\TimedTask.csproj", "{AB8D519F-F4F3-4280-B4D3-EE18F0C4CEF1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServerAccess", "ServerAccess\ServerAccess.csproj", "{CD34BA2B-74EF-4554-9836-805AACE9ED90}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{AB8D519F-F4F3-4280-B4D3-EE18F0C4CEF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AB8D519F-F4F3-4280-B4D3-EE18F0C4CEF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AB8D519F-F4F3-4280-B4D3-EE18F0C4CEF1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CD34BA2B-74EF-4554-9836-805AACE9ED90}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CD34BA2B-74EF-4554-9836-805AACE9ED90}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD34BA2B-74EF-4554-9836-805AACE9ED90}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CD34BA2B-74EF-4554-9836-805AACE9ED90}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
