@@ -23,12 +23,12 @@ namespace SqlUtility
 
 
 
-        string server = "114.215.104.217";
-        string userid = "root";
-        string password = "123";
-        string database = "vfund";
-        string port = "3306";
-        string charset = "utf-8";
+        public string server { set; get; }
+        public string userid { set; get; }
+        public string password { set; get; }
+        public string database { set; get; }
+        public string port { set; get; }
+        public string charset { set; get; }
 
         public MysqlConnector() { }
 

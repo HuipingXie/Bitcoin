@@ -89,7 +89,22 @@ namespace Test
 
 
             Console.ReadKey();
-            BitfinexSqlOperation bso = new BitfinexSqlOperation();
+
+            string server = ConfigurationManager.AppSettings["Server"];
+            string userid = ConfigurationManager.AppSettings["User"];
+            string password = ConfigurationManager.AppSettings["Password"];
+            string database = ConfigurationManager.AppSettings["Database"];
+            string port = ConfigurationManager.AppSettings["Port"];
+            string charset = ConfigurationManager.AppSettings["Charset"];
+
+            BitfinexSqlOperation bso = new BitfinexSqlOperation(
+                ConfigurationManager.AppSettings["Server"],
+                ConfigurationManager.AppSettings["User"],
+                ConfigurationManager.AppSettings["Password"],
+                ConfigurationManager.AppSettings["Database"],
+                ConfigurationManager.AppSettings["Port"],
+                ConfigurationManager.AppSettings["Charset"]
+                );
             
             var orderlist = bso.getActiveOrderInfo(10);
             foreach (var item in orderlist)

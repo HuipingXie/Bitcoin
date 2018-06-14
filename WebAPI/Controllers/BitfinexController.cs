@@ -41,9 +41,18 @@ namespace WebAPI.Controllers
         //将此变量设置为最近更行mysql的时间
         public static int LastUpdateTime = 0;
 
+
+
         public BitfinexMethod Bitfinex = new BitfinexMethod(ConfigurationManager.AppSettings["ApiKey"], ConfigurationManager.AppSettings["SecretKey"]);
 
-        public BitfinexSqlOperation BitSqlOper = new BitfinexSqlOperation();
+        public BitfinexSqlOperation BitSqlOper = new BitfinexSqlOperation(
+            ConfigurationManager.AppSettings["Server"],
+            ConfigurationManager.AppSettings["User"],
+            ConfigurationManager.AppSettings["Password"],
+            ConfigurationManager.AppSettings["Database"],
+            ConfigurationManager.AppSettings["Port"],
+            ConfigurationManager.AppSettings["Charset"]
+            );
 
         // GET: Order
         public string Index()
@@ -88,10 +97,12 @@ namespace WebAPI.Controllers
         }
 
         //
-        public async Task<string> GetBalances()
+        //public async Task<string> GetBalances()
+        public string GetBalances()
         {
-            var result = await Bitfinex.GetBalances();
-            return JsonConvert.SerializeObject(result);
+            //var result = await Bitfinex.GetBalances();
+            var res = BitSqlOper.GetBalanceInfos();
+            return JsonConvert.SerializeObject(res);
         }
 
         //
@@ -118,10 +129,12 @@ namespace WebAPI.Controllers
 
 
         //
-        public async Task<string> GetActivePositions()
+        //public async Task<string> GetActivePositions()
+        public string GetActivePositions()
         {
-            var result = await Bitfinex.GetActivePositions();
-            return JsonConvert.SerializeObject(result);
+            //var result = await Bitfinex.GetActivePositions();
+            var res = BitSqlOper.GetActivePositions();
+            return JsonConvert.SerializeObject(res);
         }
 
         //获取交易记录

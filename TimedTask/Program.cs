@@ -16,13 +16,21 @@ namespace TimedTask
 {
     class Program
     {
-        //static string apiKey = "LnfPu4YBTVAHF6aUEA770sYpje7GjVIVwWA94WJ29Ps";
-        //static string secretKey = "pOnKgUb7d9SkPYtb9ZZPN4j5jdWemww5KfDoLxo1NMp";
 
-        private BitfinexMethod bitfinxMethed = new BitfinexMethod(ConfigurationManager.AppSettings["ApiKey"],
-                ConfigurationManager.AppSettings["SecretKey"]);
 
-        private BitfinexSqlOperation bitfinexSqlOper = new BitfinexSqlOperation();
+        private BitfinexMethod bitfinxMethed = new BitfinexMethod(
+            ConfigurationManager.AppSettings["ApiKey"],
+            ConfigurationManager.AppSettings["SecretKey"]
+            );
+
+        private BitfinexSqlOperation bitfinexSqlOper = new BitfinexSqlOperation(
+            ConfigurationManager.AppSettings["Server"],
+            ConfigurationManager.AppSettings["User"],
+            ConfigurationManager.AppSettings["Password"],
+            ConfigurationManager.AppSettings["Database"],
+            ConfigurationManager.AppSettings["Port"],
+            ConfigurationManager.AppSettings["Charset"]
+            );
 
         static void Main(string[] args)
         {

@@ -15,6 +15,24 @@ namespace SqlUtility
 {
     public class BitfinexSqlOperation
     {
+        private MysqlConnector mc;
+
+        //
+        public BitfinexSqlOperation(string server,string user,string password,string database,string port,string charset)
+        {
+            this.mc = new MysqlConnector(server, user, password, database);
+            this.mc.server = server;
+            this.mc.userid = user;
+            this.mc.password = password;
+            this.mc.database = database;
+            this.mc.port=port;
+            this.mc.charset = charset;
+            
+        }
+
+
+        
+
         //将DateTime转成int的时间戳
         private int GetTimeStamp(DateTime dt)
         {
@@ -27,7 +45,7 @@ namespace SqlUtility
         //1.1添加OrderInfo的数据,添加历史记录
         public int AddOrderInfo(List<OrderInfo> orderList)
         {
-            MysqlConnector mc = new MysqlConnector();
+            
 
             string sqlString = "insert into `orderinfo`(id,symbol,exchange,price,avg_execution_price,side,type,timestamp,is_live,is_cancelled,is_hidden,was_forced,original_amount,remaining_amount,executed_amount) values";
 
@@ -63,7 +81,7 @@ namespace SqlUtility
         //2.1添加ActiveOrderInfo的内容
         public int AddActiveOrderInfo(List<OrderInfo> activeOrderList)
         {
-            MysqlConnector mc = new MysqlConnector();
+            //MysqlConnector mc = new MysqlConnector();
 
             string sqlString = "insert into `activeorderinfo`(id,symbol,exchange,price,avg_execution_price,side,type,timestamp,is_live,is_cancelled,is_hidden,was_forced,original_amount,remaining_amount,executed_amount) values";
 
@@ -100,7 +118,7 @@ namespace SqlUtility
         //3.1添加activepositions表中的数据
         public int AddActivePositions(List<PositionInfo> activePositionsList)
         {
-            MysqlConnector mc = new MysqlConnector();
+            //MysqlConnector mc = new MysqlConnector();
 
             string sqlString = "insert into `positioninfo`(id,symbol,status,base,amount,timestamp,swap,pl) values";
 
@@ -127,7 +145,7 @@ namespace SqlUtility
         //4.1添加balanceinfo表中的数据
         public int AddBalanceInfo(List<BalanceInfo> balanceInfoList)
         {
-            MysqlConnector mc = new MysqlConnector();
+            //MysqlConnector mc = new MysqlConnector();
 
             string sqlString = "insert into `balanceinfo`(type,currency,amount,available) values";
 
@@ -165,7 +183,7 @@ namespace SqlUtility
         {
             int end = start + limit;
 
-            MysqlConnector mc = new MysqlConnector();
+            //MysqlConnector mc = new MysqlConnector();
 
             string sqlStr = String.Format("select * from {0} order by auto_id desc limit {1},{2}", databaseName, start, end);
             MySqlDataReader dr = mc.ExeQuery(sqlStr);
@@ -194,7 +212,7 @@ namespace SqlUtility
         //清除表中的数据
         public int ClearAllData(string dataName)
         {
-            MysqlConnector mc = new MysqlConnector();
+            //MysqlConnector mc = new MysqlConnector();
             string sqlString = "truncate " + dataName;
             return mc.ExeUpdate(sqlString);
         }
