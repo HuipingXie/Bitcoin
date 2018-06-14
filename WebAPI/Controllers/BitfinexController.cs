@@ -38,10 +38,16 @@ namespace WebAPI.Controllers
         //在实际程序中，此id需要在程序启动时从数据库中拿出
         public static int OrderHistoryId = 0;
 
-        //将此变量设置为最近更行mysql的时间
-        public static int LastUpdateTime = 0;
+        //将此变量设置为最近更新mysql的时间
+        //public static int LastUpdateTime = 0;
 
-
+        //将时间转成时间戳
+        private static int GetTimeStamp(DateTime dt)
+        {
+            DateTime dateStart = new DateTime(1970, 1, 1, 8, 0, 0);
+            int timeStamp = Convert.ToInt32((dt - dateStart).TotalSeconds);
+            return timeStamp;
+        }
 
         public BitfinexMethod Bitfinex = new BitfinexMethod(ConfigurationManager.AppSettings["ApiKey"], ConfigurationManager.AppSettings["SecretKey"]);
 
@@ -97,12 +103,28 @@ namespace WebAPI.Controllers
         }
 
         //
-        //public async Task<string> GetBalances()
-        public string GetBalances()
+        public async Task<string> GetBalances()
+        //public string GetBalances()
         {
+            int timeStamp = GetTimeStamp(DateTime.Now);
+            long lastUpdateTime = BitSqlOper.GetLastUpdateTime("balanceinfo");
+            //如果上次更新时间超过60s，则直接调用接口
+            if (timeStamp-lastUpdateTime>60)
+            {
+                var result = await Bitfinex.GetBalances();
+                BitSqlOper.AddBalanceInfo(result);
+                return JsonConvert.SerializeObject(result);
+
+            }
+            else
+            {
+                var result = BitSqlOper.GetBalanceInfos();
+                return JsonConvert.SerializeObject(result);
+            }
+
             //var result = await Bitfinex.GetBalances();
-            var res = BitSqlOper.GetBalanceInfos();
-            return JsonConvert.SerializeObject(res);
+            //var res = BitSqlOper.GetBalanceInfos();
+            //return JsonConvert.SerializeObject(result);
         }
 
         //
@@ -114,27 +136,39 @@ namespace WebAPI.Controllers
         }
 
         //获取订单历史
-        //public async Task<string> GetOrdersHistory(int limit=100)
-        public string GetOrdersHistory(int limit = 100)
+        public async Task<string> GetOrdersHistory(int limit=100)
+        //public string GetOrdersHistory(int limit = 100)
         {
             //此函数用到数据库，以数据库为缓存
-            //突然想到，可以用数据库的视图方式来管理缓存，即试图存储的是最后的100条记录
+            
 
-            //var result = await Bitfinex.GetOrdersHistory(limit);
-            var res = BitSqlOper.GetOrderHistory(limit);
-            return JsonConvert.SerializeObject(res);
+
+            int timeStamp = GetTimeStamp(DateTime.Now);
+            long lastUpdateTime = BitSqlOper.GetLastUpdateTime("orderinfo");
+
+            if (timeStamp - lastUpdateTime > 60)
+            {
+                var result = await Bitfinex.GetOrdersHistory(limit);
+                BitSqlOper.UpdateOrderHistory(result);
+                return JsonConvert.SerializeObject(result);
+            }
+            else
+            {
+                var result = BitSqlOper.GetOrderHistory(limit);
+                return JsonConvert.SerializeObject(result);
+            }
 
         }
 
 
 
         //
-        //public async Task<string> GetActivePositions()
-        public string GetActivePositions()
+        public async Task<string> GetActivePositions()
+        //public string GetActivePositions()
         {
-            //var result = await Bitfinex.GetActivePositions();
-            var res = BitSqlOper.GetActivePositions();
-            return JsonConvert.SerializeObject(res);
+            var result = await Bitfinex.GetActivePositions();
+            //var res = BitSqlOper.GetActivePositions();
+            return JsonConvert.SerializeObject(result);
         }
 
         //获取交易记录
