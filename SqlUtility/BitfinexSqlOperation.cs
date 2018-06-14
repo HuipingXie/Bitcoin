@@ -76,6 +76,12 @@ namespace SqlUtility
             {
                 AddOrderInfo(newHistoryOrders);
             }
+
+            int timestamp = GetTimeStamp(DateTime.Now);
+            string updateStr = string.Format("update orderinfo set updatetime={0}", timestamp);
+            //无论新增与否，都将updatetime内容更新
+            mc.ExeUpdate(updateStr);
+
         }
 
         //1.1.2
@@ -96,7 +102,7 @@ namespace SqlUtility
         {
             //获取30天以内的历史数据
             int startTimeStamp = GetTimeStamp(DateTime.Now)- 2592000;
-            string sqlString = string.Format("select * from ordersinfo where timestamp>{0}",startTimeStamp.ToString());
+            string sqlString = string.Format("select * from orderinfo where timestamp>{0}",startTimeStamp.ToString());
 
             return GetValueFromDB<OrderInfo>(sqlString);
         }
