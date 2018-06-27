@@ -23,7 +23,7 @@ namespace BitfinexAPI
         public static int Subscribe(BaseInfo args, Action<JArray> handler)
         {
             WebSocket ws = new WebSocket(Endpoint);
-            //ws.SetProxy("http://localhost:1080", null, null);
+            ws.SetProxy("http://localhost:1080", null, null);
 
             ws.OnMessage += (sender, message) =>
             {
@@ -41,7 +41,6 @@ namespace BitfinexAPI
             ws.Connect();
 
             ws.Send(JsonConvert.SerializeObject(args));
-
             _socketPool.Add(++_socketIdCounter, ws);
             return _socketIdCounter;
         }

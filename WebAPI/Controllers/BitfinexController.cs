@@ -109,7 +109,7 @@ namespace WebAPI.Controllers
             int timeStamp = GetTimeStamp(DateTime.Now);
             long lastUpdateTime = BitSqlOper.GetLastUpdateTime("balanceinfo");
             //如果上次更新时间超过60s，则直接调用接口
-            if (timeStamp-lastUpdateTime>60)
+            if (timeStamp-lastUpdateTime>61)
             {
                 var result = await Bitfinex.GetBalances();
                 BitSqlOper.AddBalanceInfo(result);
@@ -146,7 +146,7 @@ namespace WebAPI.Controllers
             int timeStamp = GetTimeStamp(DateTime.Now);
             long lastUpdateTime = BitSqlOper.GetLastUpdateTime("orderinfo");
 
-            if (timeStamp - lastUpdateTime > 60)
+            if (timeStamp - lastUpdateTime > 61)
             {
                 var result = await Bitfinex.GetOrdersHistory(limit);
                 BitSqlOper.UpdateOrderHistory(result);

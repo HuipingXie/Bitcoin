@@ -32,13 +32,8 @@
             this.RefreshButton = new System.Windows.Forms.Button();
             this.AmountBox = new System.Windows.Forms.TextBox();
             this.SymbolBox = new System.Windows.Forms.TextBox();
-            this.ExecuteButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.SideBox = new System.Windows.Forms.ComboBox();
-            this.TypeBox = new System.Windows.Forms.ComboBox();
-            this.label4 = new System.Windows.Forms.Label();
             this.PriceBox = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.CancelButton = new System.Windows.Forms.Button();
@@ -86,13 +81,23 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
+            this.panelOrderType = new System.Windows.Forms.Panel();
+            this.radioBtnExcMarket = new System.Windows.Forms.RadioButton();
+            this.radioBtnExcLimit = new System.Windows.Forms.RadioButton();
+            this.radioBtnMarket = new System.Windows.Forms.RadioButton();
+            this.radioBtnLimit = new System.Windows.Forms.RadioButton();
+            this.buttonBuy = new System.Windows.Forms.Button();
+            this.buttonSell = new System.Windows.Forms.Button();
+            this.buttonBigOrder = new System.Windows.Forms.Button();
+            this.panelOrderType.SuspendLayout();
             this.SuspendLayout();
             // 
             // RefreshButton
             // 
-            this.RefreshButton.Location = new System.Drawing.Point(1621, 526);
+            this.RefreshButton.Location = new System.Drawing.Point(1441, 394);
+            this.RefreshButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.RefreshButton.Name = "RefreshButton";
-            this.RefreshButton.Size = new System.Drawing.Size(114, 95);
+            this.RefreshButton.Size = new System.Drawing.Size(101, 71);
             this.RefreshButton.TabIndex = 0;
             this.RefreshButton.Text = "Refresh";
             this.RefreshButton.UseVisualStyleBackColor = true;
@@ -100,111 +105,61 @@
             // 
             // AmountBox
             // 
-            this.AmountBox.Location = new System.Drawing.Point(278, 560);
+            this.AmountBox.Location = new System.Drawing.Point(279, 456);
+            this.AmountBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.AmountBox.Name = "AmountBox";
-            this.AmountBox.Size = new System.Drawing.Size(127, 26);
+            this.AmountBox.Size = new System.Drawing.Size(113, 25);
             this.AmountBox.TabIndex = 101;
             // 
             // SymbolBox
             // 
-            this.SymbolBox.Location = new System.Drawing.Point(119, 560);
+            this.SymbolBox.Location = new System.Drawing.Point(106, 457);
+            this.SymbolBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.SymbolBox.Name = "SymbolBox";
-            this.SymbolBox.Size = new System.Drawing.Size(127, 26);
+            this.SymbolBox.Size = new System.Drawing.Size(113, 25);
             this.SymbolBox.TabIndex = 100;
-            // 
-            // ExecuteButton
-            // 
-            this.ExecuteButton.Location = new System.Drawing.Point(1008, 526);
-            this.ExecuteButton.Name = "ExecuteButton";
-            this.ExecuteButton.Size = new System.Drawing.Size(114, 95);
-            this.ExecuteButton.TabIndex = 105;
-            this.ExecuteButton.Text = "Execute";
-            this.ExecuteButton.UseVisualStyleBackColor = true;
-            this.ExecuteButton.Click += new System.EventHandler(this.ExecuteButton_Click);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(115, 538);
+            this.label1.Location = new System.Drawing.Point(102, 441);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(58, 20);
+            this.label1.Size = new System.Drawing.Size(55, 15);
             this.label1.TabIndex = 7;
             this.label1.Text = "symbol";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(436, 538);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(38, 20);
-            this.label2.TabIndex = 8;
-            this.label2.Text = "side";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(274, 537);
+            this.label3.Location = new System.Drawing.Point(276, 439);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(63, 20);
+            this.label3.Size = new System.Drawing.Size(55, 15);
             this.label3.TabIndex = 9;
             this.label3.Text = "amount";
             // 
-            // SideBox
-            // 
-            this.SideBox.FormattingEnabled = true;
-            this.SideBox.Items.AddRange(new object[] {
-            "BUY",
-            "SELL"});
-            this.SideBox.Location = new System.Drawing.Point(440, 560);
-            this.SideBox.Name = "SideBox";
-            this.SideBox.Size = new System.Drawing.Size(145, 28);
-            this.SideBox.TabIndex = 102;
-            this.SideBox.SelectedIndexChanged += new System.EventHandler(this.SideBox_SelectedIndexChanged);
-            // 
-            // TypeBox
-            // 
-            this.TypeBox.FormattingEnabled = true;
-            this.TypeBox.Items.AddRange(new object[] {
-            "LIMIT",
-            "MARKET",
-            "EXCHANGE_LIMIT",
-            "EXCHANGE_MARKET"});
-            this.TypeBox.Location = new System.Drawing.Point(619, 560);
-            this.TypeBox.Name = "TypeBox";
-            this.TypeBox.Size = new System.Drawing.Size(145, 28);
-            this.TypeBox.TabIndex = 103;
-            this.TypeBox.SelectedIndexChanged += new System.EventHandler(this.TypeBox_SelectedIndexChanged);
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(615, 538);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(39, 20);
-            this.label4.TabIndex = 12;
-            this.label4.Text = "type";
-            // 
             // PriceBox
             // 
-            this.PriceBox.Location = new System.Drawing.Point(799, 560);
+            this.PriceBox.Location = new System.Drawing.Point(757, 456);
+            this.PriceBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.PriceBox.Name = "PriceBox";
-            this.PriceBox.Size = new System.Drawing.Size(127, 26);
+            this.PriceBox.Size = new System.Drawing.Size(113, 25);
             this.PriceBox.TabIndex = 104;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(795, 537);
+            this.label5.Location = new System.Drawing.Point(754, 439);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(43, 20);
+            this.label5.Size = new System.Drawing.Size(47, 15);
             this.label5.TabIndex = 14;
             this.label5.Text = "price";
             // 
             // CancelButton
             // 
-            this.CancelButton.Location = new System.Drawing.Point(1621, 338);
+            this.CancelButton.Location = new System.Drawing.Point(1441, 268);
+            this.CancelButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.CancelButton.Name = "CancelButton";
-            this.CancelButton.Size = new System.Drawing.Size(114, 95);
+            this.CancelButton.Size = new System.Drawing.Size(101, 71);
             this.CancelButton.TabIndex = 15;
             this.CancelButton.Text = "Cancel";
             this.CancelButton.UseVisualStyleBackColor = true;
@@ -212,16 +167,18 @@
             // 
             // PidBox
             // 
-            this.PidBox.Location = new System.Drawing.Point(1468, 148);
+            this.PidBox.Location = new System.Drawing.Point(1305, 168);
+            this.PidBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.PidBox.Name = "PidBox";
-            this.PidBox.Size = new System.Drawing.Size(147, 26);
+            this.PidBox.Size = new System.Drawing.Size(131, 25);
             this.PidBox.TabIndex = 106;
             // 
             // CloseButton
             // 
-            this.CloseButton.Location = new System.Drawing.Point(1621, 108);
+            this.CloseButton.Location = new System.Drawing.Point(1441, 138);
+            this.CloseButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.CloseButton.Name = "CloseButton";
-            this.CloseButton.Size = new System.Drawing.Size(114, 95);
+            this.CloseButton.Size = new System.Drawing.Size(101, 71);
             this.CloseButton.TabIndex = 107;
             this.CloseButton.Text = "Close";
             this.CloseButton.UseVisualStyleBackColor = true;
@@ -230,9 +187,9 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(1464, 125);
+            this.label6.Location = new System.Drawing.Point(1301, 151);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(84, 20);
+            this.label6.Size = new System.Drawing.Size(103, 15);
             this.label6.TabIndex = 108;
             this.label6.Text = "position id:";
             // 
@@ -249,9 +206,10 @@
             this.columnHeader28});
             this.PositionsView.FullRowSelect = true;
             this.PositionsView.GridLines = true;
-            this.PositionsView.Location = new System.Drawing.Point(12, 12);
+            this.PositionsView.Location = new System.Drawing.Point(11, 9);
+            this.PositionsView.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.PositionsView.Name = "PositionsView";
-            this.PositionsView.Size = new System.Drawing.Size(1335, 290);
+            this.PositionsView.Size = new System.Drawing.Size(1187, 255);
             this.PositionsView.TabIndex = 111;
             this.PositionsView.UseCompatibleStateImageBehavior = false;
             this.PositionsView.View = System.Windows.Forms.View.Details;
@@ -311,9 +269,10 @@
             this.columnHeader14});
             this.OrdersView.FullRowSelect = true;
             this.OrdersView.GridLines = true;
-            this.OrdersView.Location = new System.Drawing.Point(12, 308);
+            this.OrdersView.Location = new System.Drawing.Point(11, 268);
+            this.OrdersView.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.OrdersView.Name = "OrdersView";
-            this.OrdersView.Size = new System.Drawing.Size(1335, 175);
+            this.OrdersView.Size = new System.Drawing.Size(1187, 131);
             this.OrdersView.TabIndex = 112;
             this.OrdersView.UseCompatibleStateImageBehavior = false;
             this.OrdersView.View = System.Windows.Forms.View.Details;
@@ -368,18 +327,19 @@
             // 
             // FloatBox
             // 
-            this.FloatBox.Location = new System.Drawing.Point(1468, 560);
+            this.FloatBox.Location = new System.Drawing.Point(1305, 420);
+            this.FloatBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.FloatBox.Name = "FloatBox";
             this.FloatBox.ReadOnly = true;
-            this.FloatBox.Size = new System.Drawing.Size(147, 26);
+            this.FloatBox.Size = new System.Drawing.Size(131, 25);
             this.FloatBox.TabIndex = 113;
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(1418, 563);
+            this.label8.Location = new System.Drawing.Point(1244, 428);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(44, 20);
+            this.label8.Size = new System.Drawing.Size(55, 15);
             this.label8.TabIndex = 114;
             this.label8.Text = "float:";
             // 
@@ -397,9 +357,10 @@
             this.columnHeader22});
             this.TradesView.FullRowSelect = true;
             this.TradesView.GridLines = true;
-            this.TradesView.Location = new System.Drawing.Point(12, 730);
+            this.TradesView.Location = new System.Drawing.Point(11, 548);
+            this.TradesView.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.TradesView.Name = "TradesView";
-            this.TradesView.Size = new System.Drawing.Size(1335, 220);
+            this.TradesView.Size = new System.Drawing.Size(1187, 166);
             this.TradesView.TabIndex = 115;
             this.TradesView.UseCompatibleStateImageBehavior = false;
             this.TradesView.View = System.Windows.Forms.View.Details;
@@ -454,9 +415,10 @@
             this.columnHeader26});
             this.BalanceView.FullRowSelect = true;
             this.BalanceView.GridLines = true;
-            this.BalanceView.Location = new System.Drawing.Point(1353, 730);
+            this.BalanceView.Location = new System.Drawing.Point(1203, 548);
+            this.BalanceView.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.BalanceView.Name = "BalanceView";
-            this.BalanceView.Size = new System.Drawing.Size(481, 220);
+            this.BalanceView.Size = new System.Drawing.Size(428, 166);
             this.BalanceView.TabIndex = 116;
             this.BalanceView.UseCompatibleStateImageBehavior = false;
             this.BalanceView.View = System.Windows.Forms.View.Details;
@@ -483,43 +445,137 @@
             // 
             // OidBox
             // 
-            this.OidBox.Location = new System.Drawing.Point(1468, 378);
+            this.OidBox.Location = new System.Drawing.Point(1305, 298);
+            this.OidBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.OidBox.Name = "OidBox";
-            this.OidBox.Size = new System.Drawing.Size(147, 26);
+            this.OidBox.Size = new System.Drawing.Size(131, 25);
             this.OidBox.TabIndex = 117;
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(1464, 355);
+            this.label7.Location = new System.Drawing.Point(1301, 280);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(66, 20);
+            this.label7.Size = new System.Drawing.Size(79, 15);
             this.label7.TabIndex = 118;
             this.label7.Text = "order id:";
             // 
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(8, 707);
+            this.label9.Location = new System.Drawing.Point(13, 530);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(58, 20);
+            this.label9.Size = new System.Drawing.Size(55, 15);
             this.label9.TabIndex = 119;
             this.label9.Text = "Trades";
             // 
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(1349, 707);
+            this.label10.Location = new System.Drawing.Point(1199, 530);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(75, 20);
+            this.label10.Size = new System.Drawing.Size(71, 15);
             this.label10.TabIndex = 120;
             this.label10.Text = "Balances";
             // 
+            // panelOrderType
+            // 
+            this.panelOrderType.Controls.Add(this.radioBtnExcMarket);
+            this.panelOrderType.Controls.Add(this.radioBtnExcLimit);
+            this.panelOrderType.Controls.Add(this.radioBtnMarket);
+            this.panelOrderType.Controls.Add(this.radioBtnLimit);
+            this.panelOrderType.Location = new System.Drawing.Point(507, 419);
+            this.panelOrderType.Name = "panelOrderType";
+            this.panelOrderType.Size = new System.Drawing.Size(178, 124);
+            this.panelOrderType.TabIndex = 121;
+            // 
+            // radioBtnExcMarket
+            // 
+            this.radioBtnExcMarket.AutoSize = true;
+            this.radioBtnExcMarket.Location = new System.Drawing.Point(27, 95);
+            this.radioBtnExcMarket.Name = "radioBtnExcMarket";
+            this.radioBtnExcMarket.Size = new System.Drawing.Size(148, 19);
+            this.radioBtnExcMarket.TabIndex = 3;
+            this.radioBtnExcMarket.TabStop = true;
+            this.radioBtnExcMarket.Text = "EXCHANGE_MARKET";
+            this.radioBtnExcMarket.UseVisualStyleBackColor = true;
+            this.radioBtnExcMarket.CheckedChanged += new System.EventHandler(this.radioBtnExcMarket_CheckedChanged);
+            // 
+            // radioBtnExcLimit
+            // 
+            this.radioBtnExcLimit.AutoSize = true;
+            this.radioBtnExcLimit.Location = new System.Drawing.Point(27, 69);
+            this.radioBtnExcLimit.Name = "radioBtnExcLimit";
+            this.radioBtnExcLimit.Size = new System.Drawing.Size(140, 19);
+            this.radioBtnExcLimit.TabIndex = 2;
+            this.radioBtnExcLimit.TabStop = true;
+            this.radioBtnExcLimit.Text = "EXCHANGE_LIMIT";
+            this.radioBtnExcLimit.UseVisualStyleBackColor = true;
+            // 
+            // radioBtnMarket
+            // 
+            this.radioBtnMarket.AutoSize = true;
+            this.radioBtnMarket.Location = new System.Drawing.Point(27, 43);
+            this.radioBtnMarket.Name = "radioBtnMarket";
+            this.radioBtnMarket.Size = new System.Drawing.Size(76, 19);
+            this.radioBtnMarket.TabIndex = 1;
+            this.radioBtnMarket.TabStop = true;
+            this.radioBtnMarket.Text = "MARKET";
+            this.radioBtnMarket.UseVisualStyleBackColor = true;
+            this.radioBtnMarket.CheckedChanged += new System.EventHandler(this.radioBtnMarket_CheckedChanged);
+            // 
+            // radioBtnLimit
+            // 
+            this.radioBtnLimit.AutoSize = true;
+            this.radioBtnLimit.Location = new System.Drawing.Point(27, 17);
+            this.radioBtnLimit.Name = "radioBtnLimit";
+            this.radioBtnLimit.Size = new System.Drawing.Size(68, 19);
+            this.radioBtnLimit.TabIndex = 0;
+            this.radioBtnLimit.TabStop = true;
+            this.radioBtnLimit.Text = "LIMIT";
+            this.radioBtnLimit.UseVisualStyleBackColor = true;
+            // 
+            // buttonBuy
+            // 
+            this.buttonBuy.BackColor = System.Drawing.Color.LimeGreen;
+            this.buttonBuy.Location = new System.Drawing.Point(1004, 407);
+            this.buttonBuy.Name = "buttonBuy";
+            this.buttonBuy.Size = new System.Drawing.Size(118, 57);
+            this.buttonBuy.TabIndex = 122;
+            this.buttonBuy.Text = "BUY";
+            this.buttonBuy.UseVisualStyleBackColor = false;
+            this.buttonBuy.Click += new System.EventHandler(this.buttonBuy_Click);
+            // 
+            // buttonSell
+            // 
+            this.buttonSell.BackColor = System.Drawing.Color.Red;
+            this.buttonSell.Location = new System.Drawing.Point(1004, 473);
+            this.buttonSell.Name = "buttonSell";
+            this.buttonSell.Size = new System.Drawing.Size(118, 60);
+            this.buttonSell.TabIndex = 123;
+            this.buttonSell.Text = "SELL";
+            this.buttonSell.UseVisualStyleBackColor = false;
+            this.buttonSell.Click += new System.EventHandler(this.buttonSell_Click);
+            // 
+            // buttonBigOrder
+            // 
+            this.buttonBigOrder.Location = new System.Drawing.Point(1363, 28);
+            this.buttonBigOrder.Name = "buttonBigOrder";
+            this.buttonBigOrder.Size = new System.Drawing.Size(120, 51);
+            this.buttonBigOrder.TabIndex = 124;
+            this.buttonBigOrder.Text = "短线精灵";
+            this.buttonBigOrder.UseVisualStyleBackColor = true;
+            this.buttonBigOrder.Click += new System.EventHandler(this.buttonBigOrder_Click);
+            // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1846, 962);
+            this.ClientSize = new System.Drawing.Size(1641, 722);
+            this.Controls.Add(this.buttonBigOrder);
+            this.Controls.Add(this.buttonSell);
+            this.Controls.Add(this.buttonBuy);
+            this.Controls.Add(this.panelOrderType);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label7);
@@ -536,18 +592,16 @@
             this.Controls.Add(this.CancelButton);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.PriceBox);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.TypeBox);
-            this.Controls.Add(this.SideBox);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.ExecuteButton);
             this.Controls.Add(this.SymbolBox);
             this.Controls.Add(this.AmountBox);
             this.Controls.Add(this.RefreshButton);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "MainForm";
             this.Text = "vFund Trading Portal - Bitfinex";
+            this.panelOrderType.ResumeLayout(false);
+            this.panelOrderType.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -557,13 +611,8 @@
         private System.Windows.Forms.Button RefreshButton;
         private System.Windows.Forms.TextBox AmountBox;
         private System.Windows.Forms.TextBox SymbolBox;
-        private System.Windows.Forms.Button ExecuteButton;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ComboBox SideBox;
-        private System.Windows.Forms.ComboBox TypeBox;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox PriceBox;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button CancelButton;
@@ -611,6 +660,14 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Panel panelOrderType;
+        private System.Windows.Forms.RadioButton radioBtnExcMarket;
+        private System.Windows.Forms.RadioButton radioBtnExcLimit;
+        private System.Windows.Forms.RadioButton radioBtnMarket;
+        private System.Windows.Forms.RadioButton radioBtnLimit;
+        private System.Windows.Forms.Button buttonBuy;
+        private System.Windows.Forms.Button buttonSell;
+        private System.Windows.Forms.Button buttonBigOrder;
     }
 }
 

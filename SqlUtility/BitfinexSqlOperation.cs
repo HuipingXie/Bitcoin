@@ -204,7 +204,10 @@ namespace SqlUtility
             //
             foreach (BalanceInfo balanceItem in balanceInfoList)
             {
-
+                if (balanceItem.amount == 0)
+                {
+                    continue;
+                }
                 string value = String.Format("('{0}','{1}',{2},{3},{4})", balanceItem.type, balanceItem.currency, balanceItem.amount, balanceItem.available,updateTimeStamp);
                 sqlString += value + ",";
             }
@@ -226,8 +229,6 @@ namespace SqlUtility
         //此处为通用的数据库操作,但是因为不同的表可能出现的问题不一样，因此待定吧
         public int InsertValueToDB<T>(string databaseName, List<T> listData)
         {
-
-
             return 0;
         }
 
@@ -236,9 +237,6 @@ namespace SqlUtility
         public List<T> GetValueFromDB<T>(string databaseName, int start = 0, int limit = 100)
         {
             int end = start + limit;
-
-            //MysqlConnector mc = new MysqlConnector();
-
             string sqlStr = String.Format("select * from {0} order by auto_id desc limit {1},{2}", databaseName, start, end);
             MySqlDataReader dr = mc.ExeQuery(sqlStr);
             List<Dictionary<string, object>> orderDictList = new List<Dictionary<string, object>>();
@@ -290,11 +288,9 @@ namespace SqlUtility
         }
 
 
-
         //清除表中的数据
         public int ClearAllData(string dataName)
         {
-            //MysqlConnector mc = new MysqlConnector();
             string sqlString = "truncate " + dataName;
             return mc.ExeUpdate(sqlString);
         }

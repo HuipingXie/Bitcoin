@@ -28,8 +28,8 @@ namespace BitfinexAPI
         EXCHANGE,
         [EnumMember(Value = "trading")]
         TRADING,
-        [EnumMember(Value = "funding")]
-        FUNDING,
+        [EnumMember(Value = "deposit")]
+        DEPOSIT,
     }
 
     public enum KlineInterval

@@ -1,9 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace BitfinexAPI
 {
     public class BitfinexStream
     {
+        private static List<int> socketIdList =new List<int>();
+
         BaseInfo GeneratePayload(string type)
         {
             var args = new BaseInfo();
@@ -21,10 +24,10 @@ namespace BitfinexAPI
         {
             var args = GeneratePayload("trades");
             args.Add("pair", symbol.ToUpper());
-
-            AccessWebSocket.Subscribe(args, o =>
+            
+            int socketID=AccessWebSocket.Subscribe(args, o =>
             {
-                if ((o.Count == 6) || (o.Count == 7))
+                if ((o.Count == 6))
                     handler(new PairInfo()
                     {
                         amount = (decimal)o[o.Count - 1],
@@ -32,6 +35,16 @@ namespace BitfinexAPI
                         timestamp = DateTimeOffset.FromUnixTimeSeconds((long)o[o.Count - 3]).DateTime,
                     });
             });
+            socketIdList.Add(socketID);
+        }
+
+        public void CloseAllSocketConnet()
+        {
+            foreach(int socketID in socketIdList)
+            {
+                AccessWebSocket.Unsubscribe(socketID);
+            }
+            socketIdList.Clear();
         }
 
         public void RetrieveOrderBooks(Action<PairInfo> handler, string symbol, string precision)

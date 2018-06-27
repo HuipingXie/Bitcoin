@@ -11,6 +11,8 @@ namespace Portal
         {
             InitializeComponent();
             Init();
+            SymbolBoxHint();
+            this.radioBtnLimit.Checked = true;
         }
 
         private async void Init()
@@ -40,20 +42,6 @@ namespace Portal
                         i.amount.ToString("N4"),
                         i.available.ToString("N4"),
                     }));
-        }
-
-        private async void ExecuteButton_Click(object sender, EventArgs e)
-        {
-            string symbol = SymbolBox.Text;
-            decimal amount = decimal.Parse(AmountBox.Text);
-            decimal price = decimal.Parse(PriceBox.Text);
-            OrderSide side = (OrderSide)Enum.Parse(typeof(OrderSide), SideBox.Text);
-            OrderType type = (OrderType)Enum.Parse(typeof(OrderType), TypeBox.Text);
-
-            var result = await Program.Backend.CreateOrder(symbol, amount, price, side, type);
-
-            MessageBox.Show("id: " + result.id.ToString());
-            RefreshStatus();
         }
 
         private async void CancelButton_Click(object sender, EventArgs e)
@@ -135,32 +123,138 @@ namespace Portal
                 }));
         }
 
-        private void SideBox_SelectedIndexChanged(object sender, EventArgs e)
+
+        //以下是新增代码
+        private string orderType = "";
+        private string[] symbolArray = { "btcusd", "bchusd", "eosusd", "ethusd", "etcusd", "iotusd", "ltcusd", "xmrusd", "neousd", "omgusd", "xrpusd", "zecusd" };
+
+
+
+        //下单成功之后清空textbox
+        private void ClearTextBox()
         {
-            ExecuteButton.BackColor = System.Drawing.Color.White;
-
-            if (SideBox.SelectedItem as string == "BUY")
-                ExecuteButton.BackColor = System.Drawing.Color.Green;
-
-            if (SideBox.SelectedItem as string == "SELL")
-                ExecuteButton.BackColor = System.Drawing.Color.Red;
+            this.AmountBox.Text = "";
+            this.PriceBox.Text = "";
+            this.SymbolBox.Text = "";
+            this.radioBtnLimit.Checked = true;
         }
 
-        private void TypeBox_SelectedIndexChanged(object sender, EventArgs e)
+        //给symbolBox设置提示内容
+        public void SymbolBoxHint()
         {
-            if ((TypeBox.SelectedItem as string == "MARKET")
-                || (TypeBox.SelectedItem as string == "EXCHANGE_MARKET"))
+            this.SymbolBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
+            this.SymbolBox.AutoCompleteMode = AutoCompleteMode.Suggest;
+            foreach (string symbol in symbolArray)
+            {
+                this.SymbolBox.AutoCompleteCustomSource.Add(symbol);
+            }
+        }
+
+        //获取type的类型，并设置给orderType变量
+        public void SetOrderType()
+        {
+            if (this.radioBtnLimit.Checked)
+            {
+                orderType = "LIMIT";
+            }
+            else if (this.radioBtnMarket.Checked)
+            {
+                orderType = "MARKET";
+            }
+            else if (this.radioBtnExcLimit.Checked)
+            {
+                orderType = "EXCHANGE_LIMIT";
+            }
+            else if (this.radioBtnExcMarket.Checked)
+            {
+                orderType = "EXCHANGE_MARKET";
+            }
+
+            //
+        }
+
+
+        private void buttonBigOrder_Click(object sender, EventArgs e)
+        {
+            
+            TradeRecord traderec = new TradeRecord();
+            traderec.Show();
+        }
+
+        private async void buttonBuy_Click(object sender, EventArgs e)
+        {
+            //先给orderType赋值
+            SetOrderType();
+
+            string symbol = SymbolBox.Text;
+            decimal amount = decimal.Parse(AmountBox.Text);
+            decimal price = decimal.Parse(PriceBox.Text);
+
+            string sideBoxText = "BUY";
+
+            OrderSide side = (OrderSide)Enum.Parse(typeof(OrderSide), sideBoxText);
+            OrderType type = (OrderType)Enum.Parse(typeof(OrderType), orderType);
+
+            var result = await Program.Backend.CreateOrder(symbol, amount, price, side, type);
+
+            ClearTextBox();
+            //MessageBox.Show(orderType + symbol + amount + price);
+            MessageBox.Show("id: " + result.id.ToString());
+            RefreshStatus();
+        }
+
+        private async void buttonSell_Click(object sender, EventArgs e)
+        {
+            //先给orderType赋值
+            SetOrderType();
+            //此处要不要加一些界面的提醒，如果输入的某项为0等...待定
+
+            string symbol = SymbolBox.Text;
+            decimal amount = decimal.Parse(AmountBox.Text);
+            decimal price = decimal.Parse(PriceBox.Text);
+
+            string sideBoxText = "SELL";
+
+            OrderSide side = (OrderSide)Enum.Parse(typeof(OrderSide), sideBoxText);
+            OrderType type = (OrderType)Enum.Parse(typeof(OrderType), orderType);
+
+            var result = await Program.Backend.CreateOrder(symbol, amount, price, side, type);
+
+            ClearTextBox();
+            //MessageBox.Show(orderType+symbol+amount+price);
+            MessageBox.Show("id: " + result.id.ToString());
+            RefreshStatus();
+        }
+
+        private void radioBtnMarket_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioBtnMarket.Checked)
             {
                 PriceBox.Text = "1.00";
                 PriceBox.Enabled = false;
             }
+            else
+            {
+                PriceBox.Text = "";
+                PriceBox.Enabled = true;
+            }
 
-            if ((TypeBox.SelectedItem as string == "LIMIT")
-                || (TypeBox.SelectedItem as string == "EXCHANGE_LIMIT"))
+        }
+
+        private void radioBtnExcMarket_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioBtnExcMarket.Checked)
+            {
+                PriceBox.Text = "1.00";
+                PriceBox.Enabled = false;
+            }
+            else
             {
                 PriceBox.Text = "";
                 PriceBox.Enabled = true;
             }
         }
+
+
     }
 }
