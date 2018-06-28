@@ -5,6 +5,7 @@ using System.Windows.Forms;
 
 using System.Threading;
 using BitfinexAPI;
+using System.Configuration;
 
 namespace Portal
 {
@@ -13,13 +14,14 @@ namespace Portal
         private CancellationTokenSource tokenSource = new CancellationTokenSource();
         private BitfinexStream bs = new BitfinexStream();
 
+
         public TradeRecord()
         {
             InitializeComponent();
-            //ThreadPool.QueueUserWorkItem(h => AddTradeRecode("eosusd"),tokenSource.Token);
+            ThreadPool.QueueUserWorkItem(h => AddTradeRecode("eosusd"), tokenSource.Token);
             ThreadPool.QueueUserWorkItem(h => AddTradeRecode("btcusd"), tokenSource.Token);
-            //ThreadPool.QueueUserWorkItem(h => AddTradeRecode("ethusd"), tokenSource.Token);
-            //ThreadPool.QueueUserWorkItem(h => AddTradeRecode("bchusd"), tokenSource.Token);
+            ThreadPool.QueueUserWorkItem(h => AddTradeRecode("ethusd"), tokenSource.Token);
+            ThreadPool.QueueUserWorkItem(h => AddTradeRecode("bchusd"), tokenSource.Token);
         }
 
         ~TradeRecord()
@@ -101,7 +103,7 @@ namespace Portal
         //同时，争对不同的币种，提醒的数值设置也不同
         private void AddRecodeForETH(PairInfo p)
         {
-            if (Math.Abs(p.amount) > 0)
+            if (Math.Abs(p.amount) >=250)
             {
                 this.SetListView(p, "ethusd");
             }
@@ -109,7 +111,7 @@ namespace Portal
 
         private void AddRecodeForBTC(PairInfo p)
         {
-            if (Math.Abs(p.amount) > 0)
+            if (Math.Abs(p.amount) >=20)
             {
                 this.SetListView(p, "btcusd");
             }
@@ -117,7 +119,7 @@ namespace Portal
 
         private void AddRecodeForEOS(PairInfo p)
         {
-            if (Math.Abs(p.amount) > 0)
+            if (Math.Abs(p.amount) >=2500)
             {
                 this.SetListView(p, "eosusd");
             }
@@ -125,7 +127,7 @@ namespace Portal
 
         private void AddRecodeForBCH(PairInfo p)
         {
-            if (Math.Abs(p.amount) > 0)
+            if (Math.Abs(p.amount) >=150)
             {
                 this.SetListView(p, "bchusd");
             }
